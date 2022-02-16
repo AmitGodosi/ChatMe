@@ -1,0 +1,33 @@
+.conversation {
+    margin: 30px 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 20px;
+}
+
+.conversationImg {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.conversationName {
+    font-weight: 600;
+}
+
+@media only screen and (max-width: 431px) {
+    .conversation {
+        gap: 5px;
+    }
+
+    .conversationImg {
+        height: 32px;
+        width: 32px;
+    }
+
+    .conversationName {
+        font-size: 15px;
+    }
+}

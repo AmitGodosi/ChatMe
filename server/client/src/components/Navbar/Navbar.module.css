@@ -1,0 +1,49 @@
+.container {
+    width: 100vw;
+    background-color: rgb(57, 136, 125);
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.rigthBar h2 {
+    color: rgb(185, 204, 221);
+    letter-spacing: 1px;
+}
+
+.leftBar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.leftBar h2 {
+    color: rgb(185, 204, 221);
+    letter-spacing: 1px;
+}
+
+.leftBar button {
+    padding: 5px;
+    background-color: rgb(69, 176, 190);
+    font-size: 15px;
+    color: aliceblue;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.leftBar button:hover {
+    background-color: rgb(55, 151, 163); 
+}
+
+@media only screen and (max-width: 431px) {
+    .rigthBar h2 {
+        font-size: 15px;
+    }
+
+    .leftBar h2 {
+        font-size: 15px;
+    }
+}

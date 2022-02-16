@@ -1,0 +1,138 @@
+.messageContainer {
+    display: flex;
+    width: 100vw;
+    height: calc(100vh - 40px);
+}
+
+.noConversation {
+    text-align: center;
+    color: lightgray;
+    opacity: 60%;
+    font-size: 50px;
+    padding: 5px;
+}
+
+.newUsers {
+    text-align: center;
+    color: rgb(90, 87, 87);
+    font-size: 30px;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+.selectUser {
+    text-align: center;
+    font-size: 15px;
+    letter-spacing: 1px;
+    margin-top: 10px;
+}
+
+.leftBar {
+    flex: 2;
+    margin: 10px;
+}
+
+.searchContainer {
+    width: 90%;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.search {
+    background: none;
+    border: none;
+    border-bottom: 2px solid grey;
+    padding: 5px;
+    width: 100%;
+}
+
+.search:focus {
+    outline: none;
+}
+
+.newUsersList {
+    overflow-y: scroll;
+    height: 35%;
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+
+}
+
+.newUsersList::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
+
+
+.message {
+    flex: 6;
+    background-color: aliceblue;
+}
+
+.chatMessageContainer{
+    overflow-y: scroll;
+    height: 75%;
+}
+
+.chatMessageInput {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 25%;
+    padding: 0 10px;
+    background-color: rgb(206, 218, 230);
+    gap: 10px;
+}
+
+.chatMessageTextarea {
+    height: 90%;
+    width: 90%;
+    border-radius: 20px;
+    border: none;
+    background-color: rgb(227, 232, 236);
+    padding: 10px;
+}
+
+.chatMessageTextarea:focus {
+    outline: none;
+}
+
+.chatMessageInput button {
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    background-color: rgb(17, 172, 120);
+    cursor: pointer;
+}
+
+.ChatConversationName {
+    width: 100%;
+    height: min-content;
+    text-align: center;
+    background-color: rgb(245, 238, 230);
+    margin: 0;
+    padding: 10px;
+}
+
+@media only screen and (max-width: 431px) {
+    .noConversation {
+        font-size: 25px;
+    }
+
+    .newUsers {
+        font-size: 15px;
+        margin-bottom: 0;
+        border-bottom: 3px solid lightgray;
+    }
+
+    .selectUser {
+        margin-top: 10px;
+        margin-bottom: 15px;
+    }
+
+    .chatMessageTextarea {
+        width: 75%;
+    }
+}

@@ -1,0 +1,112 @@
+.registerContainer,.registerMessageWrapper,.registerFormWrapper,.registerInput,.registerForm {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.registerContainer {
+    width: 100vw;
+    height: 100vh;
+    background-color: aliceblue;
+}
+
+.registerMessageWrapper {
+    flex: 3;
+    height: 100%;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.registerMessage {
+    letter-spacing: 2px;
+    font-size: 60px;
+    padding: 50px;
+    margin: 20px;
+    color: rgb(150, 197, 197);
+}
+
+.registerFormWrapper {
+    flex: 2;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    background-color: aliceblue;
+}
+
+.registerForm {
+    height: 75%;
+    width: 75%;
+    flex-direction: column;
+    background-color: rgb(156, 202, 187);
+    border-radius: 20px;
+}
+
+.registerInput {
+    width: 75%;
+    flex-direction: column;
+}
+
+.registerInput input {
+    padding: 10px;
+    width: 100%;
+    border-radius: 10px;
+    border: none;
+}
+
+.registerInput input:focus {
+    outline: none;
+}
+
+.registerSubmit {
+    margin: 20px 0;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgb(74, 182, 119);
+    cursor: pointer;
+    color: white;
+    border: none;
+}
+
+.registerSubmit:hover {
+    background-color: rgb(47, 138, 85);
+}
+
+.registerlogin {
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgb(12, 146, 35);
+    cursor: pointer;
+}
+
+.registerlogin:hover {
+    background-color: rgb(8, 105, 25); 
+}
+
+@media only screen and (max-width: 431px) {
+    .registerContainer {
+        flex-direction: column;
+    }
+
+    .registerMessageWrapper {
+        flex: 1;
+    }
+
+    .registerMessage {
+        font-size: 45px;
+        padding: 20px;
+    }
+
+    .registerFormWrapper {
+        flex: 2;
+    }
+
+    .registerForm {
+        height: 100%;
+        margin-bottom: 20px;
+    }
+
+    .registerlogin {
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+}
