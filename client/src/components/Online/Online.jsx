@@ -2,6 +2,7 @@ import './Online.css'
 import '../Conversation/Conversation.css'
 import { axiosInstance } from '../../config'
 import noProfile from '../../asset/noProfile.png'
+import axios from 'axios'
 
 const Online = ({img, name, id, friendId}) => {
   if(img === '') img = noProfile
@@ -12,7 +13,7 @@ const Online = ({img, name, id, friendId}) => {
       senderId: id,
       reciverId: friendId
     }
-    const message = await axiosInstance.post('/conversation/', body)
+    const message = await axios.post('http://localhost:5000/api/conversation/', body)
     if(message.status === 201) {
       window.alert(message.data)
     } else if (message.status === 200) {

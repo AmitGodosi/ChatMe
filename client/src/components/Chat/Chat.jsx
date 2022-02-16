@@ -6,6 +6,7 @@ import Online from '../Online/Online';
 import { useEffect, useState, useRef} from 'react';
 import {io} from 'socket.io-client'
 import { axiosInstance } from '../../config'
+import axios from 'axios';
 
 const Chat = () => {
   const messageInput = useRef() 
@@ -48,8 +49,8 @@ const Chat = () => {
   useEffect(() => {
     const conversationHandler = async () => {
       try {
-        const URL = '/conversation/'.concat(id)
-        const res = await axiosInstance.get(URL)
+        const URL = 'http://localhost:5000/api/conversation/'.concat(id)
+        const res = await axios.get(URL)
         setConversation(res.data)
       } catch (error) {
         console.log(error)
@@ -61,7 +62,7 @@ const Chat = () => {
   //fetch all users
   useEffect(() => {
     const getUsers = async () => {
-      const allUsers = await axiosInstance.get('/users/all')
+      const allUsers = await axios.get('http://localhost:5000/api/users/all')
       setUsers(allUsers.data)
       setReversedUsers([...allUsers.data].reverse())
     }
@@ -86,7 +87,7 @@ const Chat = () => {
     })
 
     try {
-      const res = await axiosInstance.post('/message/', body)
+      const res = await axios.post('http://localhost:5000/api/message/', body)
       setMessages([...messages ,res.data])
       messageInput.current.value = ''  
     } catch (error) {
@@ -97,16 +98,16 @@ const Chat = () => {
   //get all conversation messages
   const fetchMessage = async (c) => {
     setCurrentChat(c)
-    const URL = '/message/'.concat(c._id)
-    const res = await axiosInstance.get(URL)
+    const URL = 'http://localhost:5000/api/message/'.concat(c._id)
+    const res = await axios.get(URL)
     setMessages(res.data)
 
     const friendId = c.members.filter(key => key !== id)
     const body = {
       userId: friendId
     }
-    const friendURL = '/users/?userId='.concat(friendId[0])    
-    const friend = await axiosInstance.get(friendURL, body)
+    const friendURL = 'http://localhost:5000/api/users/?userId='.concat(friendId[0])    
+    const friend = await axios.get(friendURL, body)
     setOpenConversation(friend.data)
   }
 

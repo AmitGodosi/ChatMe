@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import noProfile from '../../asset/noProfile.png'
 import { useState } from 'react'
 import { axiosInstance } from '../../config'
-
+import axios from 'axios'
 
 const Message = ({sender, text, id}) => {
   const [img , setImg] = useState(noProfile)
@@ -12,7 +12,7 @@ const Message = ({sender, text, id}) => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const user = await axiosInstance.get(`/users/?userId=${sender}`)
+      const user = await axios.get(`http://localhost:5000/api/users/?userId=${sender}`)
       if(user.data.pic !== '') setImg(user.data.pic)
     }
     fetchUser()

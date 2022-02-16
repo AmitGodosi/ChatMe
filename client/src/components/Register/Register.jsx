@@ -7,6 +7,7 @@ import { CloudUploadOutlined} from '@material-ui/icons'
 import firebase from '../../firebase'
 import { AuthContext } from '../../Context/AuthContext'
 import {CircularProgress} from '@material-ui/core'
+import axios from 'axios'
 
 const Register = () => {
     const username = useRef()
@@ -30,7 +31,7 @@ const Register = () => {
         }
         ctx.dispatch({type: 'LOGIN_START'})
         try {
-            await axiosInstance.post('/auth/register', user)
+            await axios.post('http://localhost:5000/api/auth/register', user)
             ctx.dispatch({type: 'SIGNUP_SUCCESS'})
             history.push('/login')
          } catch (error) {

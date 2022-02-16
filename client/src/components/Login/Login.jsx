@@ -4,6 +4,7 @@ import { AuthContext } from '../../Context/AuthContext'
 import {CircularProgress} from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import { axiosInstance } from '../../config'
+import axios from 'axios'
 
 
 const Login = () => {
@@ -19,7 +20,7 @@ const Login = () => {
         } 
         ctx.dispatch({type: 'LOGIN_START'})
         try {
-            const loginUser =  await axiosInstance.post('/auth/login', user)
+            const loginUser =  await axios.post('http://localhost:5000/api/auth/login', user)
             ctx.dispatch({type: 'LOGIN_SUCCESS', payload: loginUser.data})
             const { userPass, ...others } = loginUser.data
             localStorage.setItem('user', JSON.stringify(others))

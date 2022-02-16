@@ -7,6 +7,7 @@ const authRoutes = require("./routes/auth");
 const conversationRoutes = require("./routes/conversation");
 const messageRoutes = require("./routes/message");
 const usersRoutes = require("./routes/user");
+const path = require("path");
 
 dotenv.config();
 app.use(cors());
@@ -25,11 +26,14 @@ app.use("/api/conversation", conversationRoutes);
 app.use("/api/users", usersRoutes);
 app.use("/api/message", messageRoutes);
 
-app.use(express.static(path.join(__dirname, "/client/build")));
+//DEPLOYMENT
+// const __dirname1 = path.resolve();
+// app.use(express.static(path.join(__dirname1, "/client/build")));
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "/client/build", "index.html"));
-});
+// app.get("*", (req, res) => {
+//   res.sendFile(path.resolve(__dirname1, "client", "build", "index.html"));
+// });
+//DEPLOYMENT
 
 const PORT = process.env.PORT || 4000;
 
