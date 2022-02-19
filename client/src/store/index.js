@@ -1,14 +1,11 @@
 import { createSlice, configureStore } from "@reduxjs/toolkit";
 
-const initialState = { users: "", friends: "" };
+const initialState = { friends: "" };
 
 const querySlice = createSlice({
   name: "QuarySlice",
   initialState,
   reducers: {
-    users(state, actions) {
-      state.users = actions.payload;
-    },
     friends(state, actions) {
       state.friends = actions.payload;
     },

@@ -119,17 +119,19 @@ const Chat = () => {
     scrollRef.current?.scrollIntoView({behavior: 'smooth'})
   }, [openConversationMessages])
 
+
+  //-----------------SEARCH--------------------
   const friendsQueryHandler = (e) => {
-    reduxDispatch(queryActions.friends(e.target.value))
+    const query = e.target.value
+    reduxDispatch(queryActions.friends(query.toLowerCase()))
   }
 
   const usersQueryHandler = (e) => {
-    // reduxDispatch(queryActions.users(e.target.value))
-
-    if(e.target.value === '') {
+    const query = e.target.value
+    if(query === '') {
       setReversedUsers([...users].reverse())
     } else {
-      const includesUsers = users.filter(user => user.username.toLowerCase().includes(e.target.value))
+      const includesUsers = users.filter(user => user.username.toLowerCase().includes(query.toLowerCase()))
       setReversedUsers(includesUsers)
     }
   }
