@@ -16,7 +16,7 @@ const Navbar = () => {
 
   return <div className={classes.container}>
     <div className={classes.rigthBar}>
-    <h2>Chat App - By Amit Godosi</h2>
+    <h2>Amit Godosi Chat App</h2>
     </div>
     <div className={classes.leftBar}>
        <h2>{username}</h2>

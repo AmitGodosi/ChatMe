@@ -16,7 +16,7 @@ const Chat = () => {
   const [conversation, setConversation] = useState([])
   const [users, setUsers] = useState([])
   const [reversedUsers, setReversedUsers] = useState([])
-  const [usersQuery, setUsersQuery] = useState('')
+  const [isOpen, setIsOpen] = useState(false)
   const user = localStorage.getItem('user')
   const messageInput = useRef() 
   const scrollRef = useRef()
@@ -99,6 +99,7 @@ const Chat = () => {
 
   //---------------FETCH ALL CONVERSATION MESSAGE---------------
   const fetchMessage = async (c) => {
+    setIsOpen(true)
     dispatch({type: 'OPEN_CONVERSATION', payload: c})
     const URL = '/message/'.concat(c._id)
     const res = await axiosInstance.get(URL)
@@ -136,9 +137,15 @@ const Chat = () => {
     }
   }
 
+  //-----------------SHOW ALL--------------------
+  const backToMain = () => {
+    setIsOpen(false)
+  }
+
   return <div className='messageContainer'>
     {/* leftbar */}
-    <div className="leftBar">
+    {!isOpen && <div className="leftBar">
+    <h4 className='newUsers'>Your Friends</h4>
       <div className="searchContainer">
         <input placeholder='Search...' type="text" className="search" onChange={friendsQueryHandler}/>
       </div>
@@ -150,7 +157,6 @@ const Chat = () => {
       </div>
           {/* new users */}
       <h4 className='newUsers'>Newest Users</h4>
-      <h6 className='selectUser'>Tap on a user and start new conversation</h6>
       <div className="searchContainer">
         <input placeholder='Search...' type="text" className="search" onChange={usersQueryHandler}/>
       </div>
@@ -159,27 +165,31 @@ const Chat = () => {
       return <Online friendId={user._id} id={id} img={user.pic} name={user.username} key={user._id}/>
       })}
       </div>
-    </div>
+    </div>}
     
     {/* messages */}
     <div className="message">
+      {isOpen && <>
       <div className='chatMessageContainer'>
-        {Object.keys(userOpenConversation).length !== 0 && <h4 className='ChatConversationName'>{userOpenConversation.username}</h4>}
+        <div className='UserConversationNav'>
+           <button onClick={backToMain}>BACK</button>
+           <h4>{userOpenConversation.username}</h4>
+           </div>
         <div className='openConversationMessages'>
-        {openConversationMessages.length > 0 &&
-        openConversationMessages.map(message => {
+        {openConversationMessages.map(message => {
           return (<div ref={scrollRef}>
                <Message img={noProfile} sender={message.sender} text={message.text} key={message._id} id={id} />
           </div>)
         })}
         </div>
-        {openConversationMessages.length === 0 && Object.keys(userOpenConversation).length !== 0 && <h2 className='noConversation'>Start Texting...</h2>}
-        {Object.keys(userOpenConversation).length === 0 && <h2 className='noConversation'>Open a conversation</h2>}
+        {openConversationMessages.length === 0 && <h2 className='noConversation'>Start Texting...</h2>}
       </div>
-      {Object.keys(userOpenConversation).length !== 0 && <div className='chatMessageInput'>
+      <div className='chatMessageInput'>
         <textarea ref={messageInput} className='chatMessageTextarea' placeholder='Write Something...'></textarea>
         <button onClick={sendMessageHandler}>Send</button>
-      </div>}
+      </div>
+      </>}
+      {!isOpen && <h2 className='noConversation'>Open a conversation</h2>}
     </div>
 
   </div>;

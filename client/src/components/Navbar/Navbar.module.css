@@ -8,21 +8,21 @@
 }
 
 .rigthBar h2 {
-    color: rgb(185, 204, 221);
+    color: rgb(138, 173, 91);
     letter-spacing: 1px;
-    margin-left: 10px;
+    margin: 0 10px;
 }
 
 .leftBar {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 20px;
+    gap: 10px;
 }
 
 .leftBar h2 {
     color: rgb(185, 204, 221);
     letter-spacing: 1px;
+    margin: 0;
 }
 
 .leftBar button {
@@ -42,10 +42,10 @@
 
 @media only screen and (max-width: 431px) {
     .rigthBar h2 {
-        font-size: 15px;
+        font-size: 13px;
     }
 
     .leftBar h2 {
-        font-size: 15px;
+        font-size: 10px;
     }
 }

@@ -2,6 +2,7 @@
     display: flex;
     width: 100vw;
     height: calc(100vh - 40px);
+    /* overflow-y: hidden; */
 }
 
 .noConversation {
@@ -38,7 +39,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 20px;
+    margin: 10px 0;
 }
 
 .search {
@@ -55,9 +56,9 @@
 
 .newUsersList {
     overflow-y: scroll;
-    height: 35%;
-    -ms-overflow-style: none;  /* Internet Explorer 10+ */
-    scrollbar-width: none;  /* Firefox */
+    height: 40%;
+    -ms-overflow-style: none;  
+    scrollbar-width: none;  
 
 }
 
@@ -65,6 +66,9 @@
     display: none;  /* Safari and Chrome */
 }
 
+.conversationContainer {
+    height:35%;
+}
 
 .message {
     flex: 6;
@@ -76,22 +80,39 @@
     height: 75%;
 }
 
-.ChatConversationName {
-    width: 100%;
-    height: min-content;
-    text-align: center;
+.UserConversationNav {
+    display: flex;
+    align-items: center;
     background-color: rgb(179, 216, 233);
-    margin: 0;
-    padding: 10px;
-    letter-spacing: 1px;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    justify-content: center;
     position: fixed;
     z-index: 999;
+    width: 100vw;
 }
 
 .openConversationMessages {
     margin-top: 35px;
 }
+
+.UserConversationNav button {
+    margin-left: 10px;
+    border: none;
+    background-color: rgb(84, 179, 147);
+    border-radius: 10px;
+    padding: 5px;
+    font-size: 10px;
+}
+
+.UserConversationNav h4 {
+    width: 100%;
+    height: min-content;
+    text-align: center;
+    margin: 0;
+    padding: 10px;
+    letter-spacing: 1px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
 
 .chatMessageInput {
     display: flex;
