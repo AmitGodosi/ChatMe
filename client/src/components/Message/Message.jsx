@@ -12,7 +12,7 @@ const Message = ({sender, text, id}) => {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const user = await axios.get(`http://localhost:5000/api/users/?userId=${sender}`)
+      const user = await axiosInstance.get(`/users/?userId=${sender}`)
       if(user.data.pic !== '') setImg(user.data.pic)
     }
     fetchUser()

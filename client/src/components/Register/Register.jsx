@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import {useHistory} from 'react-router'
 import { CloudUploadOutlined} from '@material-ui/icons'
 import firebase from '../../firebase'
-import { AuthContext } from '../../Context/AuthContext'
+import { AuthContext } from '../../Context/Auth/AuthContext'
 import {CircularProgress} from '@material-ui/core'
 import axios from 'axios'
 
@@ -31,7 +31,7 @@ const Register = () => {
         }
         ctx.dispatch({type: 'LOGIN_START'})
         try {
-            await axios.post('http://localhost:5000/api/auth/register', user)
+            await axiosInstance.post('/auth/register', user)
             ctx.dispatch({type: 'SIGNUP_SUCCESS'})
             history.push('/login')
          } catch (error) {

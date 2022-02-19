@@ -1,11 +1,10 @@
 import { useRef, useContext } from 'react'
 import './Login.css'
-import { AuthContext } from '../../Context/AuthContext'
+import { AuthContext } from '../../Context/Auth/AuthContext'
 import {CircularProgress} from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import { axiosInstance } from '../../config'
 import axios from 'axios'
-
 
 const Login = () => {
     const password = useRef()
@@ -20,13 +19,14 @@ const Login = () => {
         } 
         ctx.dispatch({type: 'LOGIN_START'})
         try {
-            const loginUser =  await axios.post('http://localhost:5000/api/auth/login', user)
+            const loginUser =  await axiosInstance.post('/auth/login', user)
             ctx.dispatch({type: 'LOGIN_SUCCESS', payload: loginUser.data})
             const { userPass, ...others } = loginUser.data
             localStorage.setItem('user', JSON.stringify(others))
             window.location.reload(false);        
         } catch (error) {
             ctx.dispatch({type: 'LOGIN_FAILURE', payload: error})
+            console.log(error)
         }
     }
 
@@ -45,7 +45,7 @@ const Login = () => {
             <h4>Password:</h4>
             <input type='password' required minLength='6' ref={password}></input>
         </div>        
-        <button className="loginSubmit">{ctx.isFetching ? <CircularProgress color='white' size='20px' /> : 'Submit'}</button>
+        <button className="loginSubmit">{ctx.isFetching ? <CircularProgress color='inherit' size='20px' /> : 'Submit'}</button>
         <Link to='/register' style={{textDecoration: 'none', color: 'white'}} className='creareAccount'>Create a new Account</Link>
     </form>
     </div>

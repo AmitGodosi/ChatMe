@@ -76,6 +76,23 @@
     height: 75%;
 }
 
+.ChatConversationName {
+    width: 100%;
+    height: min-content;
+    text-align: center;
+    background-color: rgb(179, 216, 233);
+    margin: 0;
+    padding: 10px;
+    letter-spacing: 1px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    position: fixed;
+    z-index: 999;
+}
+
+.openConversationMessages {
+    margin-top: 35px;
+}
+
 .chatMessageInput {
     display: flex;
     align-items: center;
@@ -107,14 +124,6 @@
     cursor: pointer;
 }
 
-.ChatConversationName {
-    width: 100%;
-    height: min-content;
-    text-align: center;
-    background-color: rgb(245, 238, 230);
-    margin: 0;
-    padding: 10px;
-}
 
 @media only screen and (max-width: 431px) {
     .noConversation {

@@ -1,5 +1,5 @@
 import classes from './Navbar.module.css';
-import { AuthContext } from '../../Context/AuthContext';
+import { AuthContext } from '../../Context/Auth/AuthContext';
 import { useContext } from 'react';
 
 const Navbar = () => {

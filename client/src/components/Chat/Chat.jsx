@@ -3,26 +3,29 @@ import Message from '../Message/Message'
 import './Chat.css'
 import noProfile from '../../asset/noProfile.png'
 import Online from '../Online/Online';
-import { useEffect, useState, useRef} from 'react';
+import { useEffect, useState, useRef, useContext} from 'react';
 import {io} from 'socket.io-client'
 import { axiosInstance } from '../../config'
-import axios from 'axios';
+import { ConversationContext } from '../../Context/Conversation/ConversationContext';
+import { useDispatch } from 'react-redux'
+import { queryActions } from '../../store/index';
 
 const Chat = () => {
-  const messageInput = useRef() 
+  const reduxDispatch = useDispatch()
+  const {userOpenConversation, openConversation, openConversationMessages, dispatch} = useContext(ConversationContext)
   const [conversation, setConversation] = useState([])
-  const [messages, setMessages] = useState([])
   const [users, setUsers] = useState([])
   const [reversedUsers, setReversedUsers] = useState([])
-  const [openConversation, setOpenConversation] = useState({})
-  const [currentChat, setCurrentChat] = useState({})
+  const [usersQuery, setUsersQuery] = useState('')
   const user = localStorage.getItem('user')
-  const id = JSON.parse(user)._id
+  const messageInput = useRef() 
   const scrollRef = useRef()
-
+  const id = JSON.parse(user)._id
+  
+  //---------------SOCKET---------------
   const socket = useRef()
   const [arrivalMessage, setArrivalMessage] = useState(null)
-
+  
   useEffect(() => {
     socket.current = io("ws://localhost:8900")
     socket.current.on("getMessage", (data) => {
@@ -35,22 +38,21 @@ const Chat = () => {
   }, [])
 
   useEffect(() => {
-      arrivalMessage && currentChat?.members.includes(arrivalMessage.sender) && setMessages(prev => [...prev, arrivalMessage])
-  }, [arrivalMessage, openConversation])
+      arrivalMessage && openConversation?.members.includes(arrivalMessage.sender) && dispatch({type: 'OPEN_CONVERSATION_MESSAGES', payload:[...openConversationMessages, arrivalMessage]})
+  }, [arrivalMessage, userOpenConversation])
 
   useEffect(() => {
     socket.current.emit("addUser", id)
     socket.current.on("getUsers", users => {
-      console.log(users)
     })
   }, [id])
 
-  // fetch all conversation
+  //---------------FETCH ALL CONVERSATIONS---------------
   useEffect(() => {
     const conversationHandler = async () => {
       try {
-        const URL = 'http://localhost:5000/api/conversation/'.concat(id)
-        const res = await axios.get(URL)
+        const URL = '/conversation/'.concat(id)
+        const res = await axiosInstance.get(URL)
         setConversation(res.data)
       } catch (error) {
         console.log(error)
@@ -59,26 +61,26 @@ const Chat = () => {
     conversationHandler()
   }, [])
 
-  //fetch all users
+  //---------------FETCH ALL USERS---------------
   useEffect(() => {
     const getUsers = async () => {
-      const allUsers = await axios.get('http://localhost:5000/api/users/all')
+      const allUsers = await axiosInstance.get('/users/all')
       setUsers(allUsers.data)
       setReversedUsers([...allUsers.data].reverse())
     }
     getUsers()
   }, [])
 
-  //send new message
+  //---------------SEND NEW MESSAGE---------------
   const sendMessageHandler = async (e) => {
     e.preventDefault()
     const body = {
-      conversationId: currentChat._id,
+      conversationId: openConversation._id,
       sender: id,
       text: messageInput.current.value
     }
     
-    const receiverId = currentChat.members.find(member => member !== id)
+    const receiverId = openConversation.members.find(member => member !== id)
 
     socket.current.emit("sendMessage", {
       senderId: id,
@@ -87,40 +89,56 @@ const Chat = () => {
     })
 
     try {
-      const res = await axios.post('http://localhost:5000/api/message/', body)
-      setMessages([...messages ,res.data])
+      const res = await axiosInstance.post('/message/', body)
+      dispatch({type: 'OPEN_CONVERSATION_MESSAGES', payload: [...openConversationMessages, res.data]})
       messageInput.current.value = ''  
     } catch (error) {
       console.log(error)
     }
   }
 
-  //get all conversation messages
+  //---------------FETCH ALL CONVERSATION MESSAGE---------------
   const fetchMessage = async (c) => {
-    setCurrentChat(c)
-    const URL = 'http://localhost:5000/api/message/'.concat(c._id)
-    const res = await axios.get(URL)
-    setMessages(res.data)
+    dispatch({type: 'OPEN_CONVERSATION', payload: c})
+    const URL = '/message/'.concat(c._id)
+    const res = await axiosInstance.get(URL)
+    dispatch({type: 'OPEN_CONVERSATION_MESSAGES', payload: res.data})
 
     const friendId = c.members.filter(key => key !== id)
     const body = {
       userId: friendId
     }
-    const friendURL = 'http://localhost:5000/api/users/?userId='.concat(friendId[0])    
-    const friend = await axios.get(friendURL, body)
-    setOpenConversation(friend.data)
+    const friendURL = '/users/?userId='.concat(friendId[0])    
+    const friend = await axiosInstance.get(friendURL, body)
+    dispatch({type: 'USER_OPEN_CONVERSATION', payload: friend.data})
+
   }
 
-  // scrollDown
+  //---------------SCROLL DOWN---------------
   useEffect(() => {
     scrollRef.current?.scrollIntoView({behavior: 'smooth'})
-  }, [messages])
+  }, [openConversationMessages])
+
+  const friendsQueryHandler = (e) => {
+    reduxDispatch(queryActions.friends(e.target.value))
+  }
+
+  const usersQueryHandler = (e) => {
+    // reduxDispatch(queryActions.users(e.target.value))
+
+    if(e.target.value === '') {
+      setReversedUsers([...users].reverse())
+    } else {
+      const includesUsers = users.filter(user => user.username.toLowerCase().includes(e.target.value))
+      setReversedUsers(includesUsers)
+    }
+  }
 
   return <div className='messageContainer'>
     {/* leftbar */}
     <div className="leftBar">
       <div className="searchContainer">
-        <input placeholder='Search...' type="text" className="search" />
+        <input placeholder='Search...' type="text" className="search" onChange={friendsQueryHandler}/>
       </div>
       <div className="conversationContainer">
         {conversation.length > 0 && conversation.map(c => {
@@ -131,6 +149,9 @@ const Chat = () => {
           {/* new users */}
       <h4 className='newUsers'>Newest Users</h4>
       <h6 className='selectUser'>Tap on a user and start new conversation</h6>
+      <div className="searchContainer">
+        <input placeholder='Search...' type="text" className="search" onChange={usersQueryHandler}/>
+      </div>
       <div className='newUsersList'>
       {users.length > 0 && reversedUsers.map(user => {
       return <Online friendId={user._id} id={id} img={user.pic} name={user.username} key={user._id}/>
@@ -141,16 +162,19 @@ const Chat = () => {
     {/* messages */}
     <div className="message">
       <div className='chatMessageContainer'>
-        {Object.keys(openConversation).length !== 0 && <h4 className='ChatConversationName'>{openConversation.username}</h4>}
-        {messages.length > 0 && messages.map(message => {
-          return <div ref={scrollRef}>
+        {Object.keys(userOpenConversation).length !== 0 && <h4 className='ChatConversationName'>{userOpenConversation.username}</h4>}
+        <div className='openConversationMessages'>
+        {openConversationMessages.length > 0 &&
+        openConversationMessages.map(message => {
+          return (<div ref={scrollRef}>
                <Message img={noProfile} sender={message.sender} text={message.text} key={message._id} id={id} />
-          </div>
+          </div>)
         })}
-        {messages.length === 0 && Object.keys(openConversation).length !== 0 && <h2 className='noConversation'>Start Texting...</h2>}
-        {Object.keys(openConversation).length === 0 && <h2 className='noConversation'>Open a conversation</h2>}
+        </div>
+        {openConversationMessages.length === 0 && Object.keys(userOpenConversation).length !== 0 && <h2 className='noConversation'>Start Texting...</h2>}
+        {Object.keys(userOpenConversation).length === 0 && <h2 className='noConversation'>Open a conversation</h2>}
       </div>
-      {Object.keys(openConversation).length !== 0 && <div className='chatMessageInput'>
+      {Object.keys(userOpenConversation).length !== 0 && <div className='chatMessageInput'>
         <textarea ref={messageInput} className='chatMessageTextarea' placeholder='Write Something...'></textarea>
         <button onClick={sendMessageHandler}>Send</button>
       </div>}

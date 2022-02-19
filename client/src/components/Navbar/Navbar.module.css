@@ -4,12 +4,13 @@
     height: 40px;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .rigthBar h2 {
     color: rgb(185, 204, 221);
     letter-spacing: 1px;
+    margin-left: 10px;
 }
 
 .leftBar {
@@ -32,6 +33,7 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    margin-right: 10px;
 }
 
 .leftBar button:hover {
