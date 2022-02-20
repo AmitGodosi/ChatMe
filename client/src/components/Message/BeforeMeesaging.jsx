@@ -4,9 +4,9 @@ import noProfile from '../../asset/noProfile.png'
 import { axiosInstance } from "../../config";
 
 const BeforeMeesaging = ({m, id, user}) => {
-  const ownUser = JSON.parse(user)
   const [members, setMembers] = useState([])
   const [secondUser, setSecondUser] = useState({})
+  const [isMessages, setIsMessages] = useState(true)
   const scrollRef = useRef()
   const arr = [id]
 
@@ -17,6 +17,7 @@ const BeforeMeesaging = ({m, id, user}) => {
 
     useEffect(() => {
       const checkMembers = () => {
+        if(m.length === 0) setIsMessages(false)
         for(let message of m) {
           if(arr.length === 1 && message.sender !== arr[0]) {
             arr.push(message.sender)
@@ -41,14 +42,15 @@ const BeforeMeesaging = ({m, id, user}) => {
     }, [members])
 
   return <div>
-            {m.map(message => {
+      {isMessages && m.map(message => {
               console.log(m)
               return (
               <div ref={scrollRef}>
                <Message sender={message.sender} text={message.text} key={message._id} id={id} first={user} second={secondUser} time={message.createdAt} />
               </div>)
             })}
-        </div>;
+            {!isMessages && <h2 className='noConversation'>Start Texting...</h2>}
+       </div>;
 };
 
 export default BeforeMeesaging;

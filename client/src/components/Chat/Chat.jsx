@@ -159,6 +159,7 @@ const Chat = () => {
         {conversation.length === 0 && <p>You dont start any conversation!</p>}
       </div>
       </div>
+      
           {/* new users */}
        <div className='newUserWrapper'>
       <h4 className='newUsers'>Newest Users</h4>
@@ -181,10 +182,9 @@ const Chat = () => {
            <h4>{userOpenConversation.username}</h4>
         </div>
         <div>
-        {openConversationMessages.length > 0 && <div className='openConversationMessages'>
+        <div className='openConversationMessages'>
         {<BeforeMeesaging user={user} id={id} m={openConversationMessages} />}
-        </div>}
-        {openConversationMessages.length === 0 && <h2 className='openConversationMessages noConversation'>Start Texting...</h2>}
+        </div>
       <div className='chatMessageInput'>
         <textarea ref={messageInput} className='chatMessageTextarea' placeholder='Write Something...'></textarea>
         <button onClick={sendMessageHandler}>Send</button>
