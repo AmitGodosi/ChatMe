@@ -9,6 +9,7 @@ import { axiosInstance } from '../../config'
 import { ConversationContext } from '../../Context/Conversation/ConversationContext';
 import { useDispatch } from 'react-redux'
 import { queryActions } from '../../store/index';
+import BeforeMeesaging from '../Message/BeforeMeesaging';
 
 const Chat = () => {
   const reduxDispatch = useDispatch()
@@ -19,7 +20,7 @@ const Chat = () => {
   const [isOpen, setIsOpen] = useState(false)
   const user = localStorage.getItem('user')
   const messageInput = useRef() 
-  const scrollRef = useRef()
+  // const scrollRef = useRef()
   const id = JSON.parse(user)._id
   
   //---------------SOCKET---------------
@@ -116,9 +117,9 @@ const Chat = () => {
   }
 
   //---------------SCROLL DOWN---------------
-  useEffect(() => {
-    scrollRef.current?.scrollIntoView({behavior: 'smooth'})
-  }, [openConversationMessages])
+  // useEffect(() => {
+  //   scrollRef.current?.scrollIntoView({behavior: 'smooth'})
+  // }, [openConversationMessages])
 
 
   //-----------------SEARCH--------------------
@@ -145,6 +146,8 @@ const Chat = () => {
   return <div className='messageContainer'>
     {/* leftbar */}
     {!isOpen && <div className="leftBar">
+      {/* friends conversation */}
+    <div className='conversationWrapper'>
     <h4 className='newUsers'>Your Friends</h4>
       <div className="searchContainer">
         <input placeholder='Search...' type="text" className="search" onChange={friendsQueryHandler}/>
@@ -155,7 +158,9 @@ const Chat = () => {
         })}
         {conversation.length === 0 && <p>You dont start any conversation!</p>}
       </div>
+      </div>
           {/* new users */}
+       <div className='newUserWrapper'>
       <h4 className='newUsers'>Newest Users</h4>
       <div className="searchContainer">
         <input placeholder='Search...' type="text" className="search" onChange={usersQueryHandler}/>
@@ -165,31 +170,28 @@ const Chat = () => {
       return <Online friendId={user._id} id={id} img={user.pic} name={user.username} key={user._id}/>
       })}
       </div>
+    </div>
     </div>}
     
     {/* messages */}
     <div className="message">
       {isOpen && <>
-      <div className='chatMessageContainer'>
         <div className='UserConversationNav'>
            <button onClick={backToMain}>BACK</button>
            <h4>{userOpenConversation.username}</h4>
-           </div>
-        <div className='openConversationMessages'>
-        {openConversationMessages.map(message => {
-          return (<div ref={scrollRef}>
-               <Message img={noProfile} sender={message.sender} text={message.text} key={message._id} id={id} />
-          </div>)
-        })}
         </div>
-        {openConversationMessages.length === 0 && <h2 className='noConversation'>Start Texting...</h2>}
-      </div>
+        <div>
+        {openConversationMessages.length > 0 && <div className='openConversationMessages'>
+        {<BeforeMeesaging user={user} id={id} m={openConversationMessages} />}
+        </div>}
+        {openConversationMessages.length === 0 && <h2 className='openConversationMessages noConversation'>Start Texting...</h2>}
       <div className='chatMessageInput'>
         <textarea ref={messageInput} className='chatMessageTextarea' placeholder='Write Something...'></textarea>
         <button onClick={sendMessageHandler}>Send</button>
       </div>
+      </div>
       </>}
-      {!isOpen && <h2 className='noConversation'>Open a conversation</h2>}
+      {!isOpen && <h2 className='noOpenConversation'>Open a conversation</h2>}
     </div>
 
   </div>;

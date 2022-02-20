@@ -1,8 +1,44 @@
 .messageContainer {
     display: flex;
     width: 100vw;
-    height: calc(100vh - 40px);
-    /* overflow-y: hidden; */
+    height: calc(100vh);
+    overflow: hidden;
+}
+
+.leftBar {
+    flex: 2;
+    margin: 50px 10px 10px 10px;
+    max-height: 100vh; 
+    display: block;
+}
+
+.conversationWrapper {
+    max-height: 45%;
+    display: block;
+    margin-bottom: 20px;
+    overflow-y: scroll;
+}
+
+.conversationContainer {
+    -ms-overflow-style: none;  
+    scrollbar-width: none;  
+}
+
+.newUserWrapper {
+    height: 45%;
+    overflow-y: scroll;
+}
+
+.newUsersList {
+    -ms-overflow-style: none;  
+    scrollbar-width: none;  
+}
+
+.newUsersList::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
+.conversationContainer::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
 }
 
 .noConversation {
@@ -10,6 +46,14 @@
     color: lightgray;
     opacity: 60%;
     font-size: 50px;
+    /* padding: 20px; */
+}
+
+.noOpenConversation {
+    text-align: center;
+    color: lightgray;
+    opacity: 60%;
+    font-size: 40px;
     padding: 5px;
 }
 
@@ -28,56 +72,10 @@
     margin-top: 10px;
 }
 
-.leftBar {
-    flex: 2;
-    margin: 10px;
-}
-
-.searchContainer {
-    width: 90%;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 10px 0;
-}
-
-.search {
-    background: none;
-    border: none;
-    border-bottom: 2px solid grey;
-    padding: 5px;
-    width: 100%;
-}
-
-.search:focus {
-    outline: none;
-}
-
-.newUsersList {
-    overflow-y: scroll;
-    height: 40%;
-    -ms-overflow-style: none;  
-    scrollbar-width: none;  
-
-}
-
-.newUsersList::-webkit-scrollbar { 
-    display: none;  /* Safari and Chrome */
-}
-
-.conversationContainer {
-    height:35%;
-}
-
 .message {
     flex: 6;
     background-color: aliceblue;
-}
-
-.chatMessageContainer{
-    overflow-y: scroll;
-    height: 75%;
+    max-height: 100vh;
 }
 
 .UserConversationNav {
@@ -88,19 +86,24 @@
     position: fixed;
     z-index: 999;
     width: 100vw;
+    margin-top: 40px;
 }
 
 .openConversationMessages {
-    margin-top: 35px;
+    margin-top: 85px;
+    overflow-y: scroll;
+    height: calc(100vh - 230px);
 }
 
 .UserConversationNav button {
+    cursor: pointer;
     margin-left: 10px;
     border: none;
     background-color: rgb(84, 179, 147);
     border-radius: 10px;
-    padding: 5px;
+    padding: 7px;
     font-size: 10px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 .UserConversationNav h4 {
@@ -113,12 +116,11 @@
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
-
 .chatMessageInput {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 25%;
+    height: 150px;
     padding: 0 10px;
     background-color: rgb(206, 218, 230);
     gap: 10px;
@@ -145,12 +147,33 @@
     cursor: pointer;
 }
 
+.searchContainer {
+    width: 90%;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+.search {
+    background: none;
+    border: none;
+    border-bottom: 2px solid grey;
+    padding: 5px;
+    width: 100%;
+}
+
+.search:focus {
+    outline: none;
+}
+
 
 @media only screen and (max-width: 431px) {
     .noConversation {
         font-size: 25px;
     }
-
+    
     .newUsers {
         font-size: 15px;
         margin-bottom: 0;

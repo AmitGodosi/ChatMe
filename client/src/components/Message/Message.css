@@ -1,17 +1,25 @@
 .messageCon {
     display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+
+.textDetails {
+    display: flex;
     align-items: center;
-    justify-content: flex-start;
-    margin: 0 10px;
     gap: 10px;
 }
 
+.time {
+    font-size: 10px;
+}
+
 .ownCon {
-    justify-content: flex-start;
+    align-items: flex-start;
 }
 
 .friendCon {
-    justify-content: flex-end;
+    align-items: flex-end;
 }
 
 .messageImg {
