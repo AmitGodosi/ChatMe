@@ -1,0 +1,186 @@
+.messageContainer {
+    display: flex;
+    width: 100vw;
+    height: calc(100vh);
+    overflow: hidden;
+    flex-direction: column;
+    background-color: aliceblue;
+}
+
+.messageTitle {
+    margin-top: 50px;
+    text-align: center;
+    letter-spacing: 1.5px;
+    color: rgb(18, 71, 95);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.leftBar {
+    flex: 2;
+    margin: 10px;
+    max-height: 100vh; 
+    display: block;
+}
+
+.conversationWrapper {
+    max-height: 35%;
+    display: block;
+    margin-bottom: 20px;
+    overflow-y: scroll;
+}
+
+.conversationContainer {
+    -ms-overflow-style: none;  
+    scrollbar-width: none;  
+}
+
+.newUserWrapper {
+    height: 35%;
+    overflow-y: scroll;
+}
+
+.newUsersList {
+    -ms-overflow-style: none;  
+    scrollbar-width: none;  
+}
+
+.newUsersList::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
+.conversationContainer::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
+
+.newUsers {
+    text-align: center;
+    color: rgb(90, 87, 87);
+    font-size: 30px;
+    margin-bottom: 0;
+    margin-top: 0;
+    background-color: rgb(191, 207, 221);
+    border-radius: 10px;
+    letter-spacing: 1px;
+    padding: 5px;
+}
+
+.selectUser {
+    text-align: center;
+    font-size: 15px;
+    letter-spacing: 1px;
+    margin-top: 10px;
+}
+
+.message {
+    flex: 6;
+    background-color: aliceblue;
+    max-height: 100vh;
+}
+
+.UserConversationNav {
+    display: flex;
+    align-items: center;
+    background-color: rgb(176, 193, 209);
+    justify-content: center;
+    position: fixed;
+    z-index: 999;
+    width: 100vw;
+    margin-top: 40px;
+}
+
+.openConversationMessages {
+    margin-top: 85px;
+    overflow-y: scroll;
+    height: calc(100vh - 230px);
+}
+
+.UserConversationNav button {
+    cursor: pointer;
+    margin-left: 10px;
+    border: none;
+    background-color: rgb(84, 179, 147);
+    border-radius: 10px;
+    padding: 7px;
+    font-size: 10px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.UserConversationNav h4 {
+    width: 100%;
+    height: min-content;
+    text-align: center;
+    margin: 0;
+    padding: 10px;
+    letter-spacing: 1px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.chatMessageInput {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 150px;
+    padding: 0 10px;
+    background-color: rgb(206, 218, 230);
+    gap: 10px;
+}
+
+.chatMessageTextarea {
+    height: 90%;
+    width: 90%;
+    border-radius: 20px;
+    border: none;
+    background-color: rgb(227, 232, 236);
+    padding: 10px;
+}
+
+.chatMessageTextarea:focus {
+    outline: none;
+}
+
+.chatMessageInput button {
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    background-color: rgb(17, 172, 120);
+    cursor: pointer;
+}
+
+.searchContainer {
+    width: 100%;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+.search {
+    background: none;
+    border: none;
+    border-bottom: 2px solid grey;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.search:focus {
+    outline: none;
+}
+
+
+@media only screen and (max-width: 431px) {
+    .newUsers {
+        font-size: 20px;
+    }
+
+    .selectUser {
+        margin-top: 10px;
+        margin-bottom: 15px;
+    }
+
+    .chatMessageTextarea {
+        width: 75%;
+    }
+}

@@ -1,0 +1,53 @@
+.conversation {
+    margin:15px 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: rgb(216, 228, 245);
+    border-radius: 10px;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.cImgWrapper {
+    max-height: 50px;
+    max-width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cImg {
+    height: 90%;
+    width: 90%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.cDetails {
+    padding: 5px;
+    margin-left: 10px;
+}
+
+.cMessage {
+    margin: 5px 0 0 0;
+}
+
+.cName {
+    font-weight: 600;
+}
+
+@media only screen and (max-width: 431px) {
+    /* .conversation {
+        gap: 5px;
+    }
+
+    .cImg {
+        height: 32px;
+        width: 32px;
+    }
+
+    .cName {
+        font-size: 15px;
+    } */
+}

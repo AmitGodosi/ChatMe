@@ -1,0 +1,60 @@
+.messageCon {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+
+.textDetails {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.time {
+    font-size: 10px;
+}
+
+.ownCon {
+    align-items: flex-start;
+}
+
+.friendCon {
+    align-items: flex-end;
+}
+
+.messageImg {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+.messageText {
+    margin-right: 10px;
+    border-radius: 10px;
+    font-size: 15px;
+    padding: 10px;
+    width: 60%;
+}
+
+.ownText {
+    background-color: rgb(102, 161, 230);
+    width: 100%;
+}
+
+.friendText {
+    background-color: rgb(183, 191, 201);
+    width: 100%;
+}
+
+.noConversation {
+    text-align: center;
+    color: gray;
+    opacity: 30%;
+}
+
+@media only screen and (max-width: 431px) {
+    .messageImg {
+        height: 25px;
+        width: 25px;
+    }
+}
