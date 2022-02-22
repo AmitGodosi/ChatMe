@@ -8,7 +8,6 @@ router.post("/register", async (req, res) => {
     //generate new password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
-
     //create new user
     const newUser = new User({
       username: req.body.username,
@@ -17,7 +16,28 @@ router.post("/register", async (req, res) => {
     });
 
     if (req.body?.pic) newUser.pic = req.body.pic;
+    //save user and respond
+    const user = await newUser.save();
+    res.status(200).json(user);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
+//SOCIAL REGISTER
+router.post("/register/social", async (req, res) => {
+  //generate new password
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(req.body.password, salt);
+
+  try {
+    //create new user
+    const newUser = new User({
+      username: req.body.username,
+      email: req.body.email,
+      pic: req.body.pic || "",
+      password: hashedPassword,
+    });
     //save user and respond
     const user = await newUser.save();
     res.status(200).json(user);

@@ -19,6 +19,7 @@ mongoose.connect(
     console.log("Connected to MongoDB");
   }
 );
+
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);

@@ -1,6 +1,6 @@
-import Register from "./components/Register/Register";
 import Login from "./components/Login/Login";
 import Message from "./pages/Message";
+import Register from "./components/Register/Register";
 import {
   BrowserRouter as Router,
   Switch,

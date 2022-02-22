@@ -13,11 +13,14 @@ const BeforeMeesaging = ({m, id, user}) => {
     //---------------SCROLL DOWN---------------
     useEffect(() => {
       scrollRef.current?.scrollIntoView({behavior: 'smooth'})
+      if(m.length === 0) {
+        setIsMessages(false)
+      } else { setIsMessages(true)
+      }
     }, [m])
 
     useEffect(() => {
       const checkMembers = () => {
-        if(m.length === 0) setIsMessages(false)
         for(let message of m) {
           if(arr.length === 1 && message.sender !== arr[0]) {
             arr.push(message.sender)
@@ -41,9 +44,13 @@ const BeforeMeesaging = ({m, id, user}) => {
       fetchMembers()
     }, [members])
 
+    useEffect(() => {
+      console.log(isMessages)
+    }, [isMessages])
+
   return <div>
       {isMessages && m.map(message => {
-              console.log(m)
+        console.log(message._id)
               return (
               <div ref={scrollRef}>
                <Message sender={message.sender} text={message.text} key={message._id} id={id} first={user} second={secondUser} time={message.createdAt} />

@@ -1,10 +1,16 @@
 import { useRef, useContext } from 'react'
-import './Login.css'
 import { AuthContext } from '../../Context/Auth/AuthContext'
 import {CircularProgress} from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import { axiosInstance } from '../../config'
-import axios from 'axios'
+import classes from '../Register/Register.module.css'
+import Google from '../../asset/google.png'
+import Facebook from '../../asset/facebook.png'
+import Github from '../../asset/github.png'
+import firebase from '../../firebase'
+import { googleProvider, facebookProvider, githubProvider } from '../service/Auth'
+
+
 
 const Login = () => {
     const password = useRef()
@@ -30,25 +36,65 @@ const Login = () => {
         }
     }
 
-  return (
-  <div className='loginContainer'>
-    <div className='loginMessageWrapper'>
-        <h2 className='loginMessage'>Login now and start talking with your friends!</h2>
-    </div>
-    <div className='loginFormWrapper'>
-    <form className='loginForm' onSubmit={submitHandler}>       
-        <div className='loginInput'>
-            <h4>Email:</h4>
-            <input type='email' required ref={email}></input>
-        </div>        
-        <div className='loginInput'>
-            <h4>Password:</h4>
-            <input type='password' required minLength='6' ref={password}></input>
-        </div>        
-        <button className="loginSubmit">{ctx.isFetching ? <CircularProgress color='inherit' size='20px' /> : 'Submit'}</button>
-        <Link to='/register' style={{textDecoration: 'none', color: 'white'}} className='creareAccount'>Create a new Account</Link>
-    </form>
-    </div>
+    const socialLogin = async (provider) => {
+        try {
+            const result = await firebase.auth().signInWithPopup(provider)
+            const user = {
+                email: result.user.email,
+                password: result.user.uid
+            }
+            try {
+                const loginUser =  await axiosInstance.post('/auth/login', user)
+                const { userPass, ...others } = loginUser.data
+                localStorage.setItem('user', JSON.stringify(others))
+                window.location.reload(false);             
+            } catch (error) {
+                console.log(error)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    return (
+    <div className={classes.container}>
+        <div className={classes.nav}>
+            <h4>Amit Chat App</h4>
+            <h4>Login</h4>
+        </div>
+        <div className={classes.formWrapper}>
+        <div className={classes.form}>
+            <div>
+                <h2 className={classes.title}>Choose a Login Mathod</h2>
+            </div>
+            <div className={classes.methodWrapper}>
+                <div className={classes.social}>
+                    <div onClick={socialLogin.bind(null, googleProvider)} className={classes.google}>
+                    <img src={Google} alt="" />
+                    <h4>Google</h4>
+                    </div>    
+                    <div onClick={socialLogin.bind(null, facebookProvider)}  className={classes.facebook}>
+                    <img src={Facebook} alt="" />
+                    <h4>Facebook</h4>
+                    </div>                   
+                    <div onClick={socialLogin.bind(null, githubProvider)}  className={classes.github}>
+                    <img src={Github} alt="" />
+                    <h4>Github</h4>
+                    </div>                   
+                </div>
+                <div className={classes.center}>
+                    <div className={classes.line} />
+                    <div className={classes.or}>OR</div>
+                </div>
+                <form className={classes.data}  onSubmit={submitHandler}>
+                    <input  type='email' required ref={email} placeholder='Email'></input>
+                    <input  type='password' required minLength='6' ref={password} placeholder='Password'></input>
+                    <button className={classes.registerButton}>{ctx.isFetching ? <CircularProgress color='white' size='20px' /> : 'Login'}</button>
+                    <Link to='/register' style={{textDecoration: 'none', color: 'white'}} className={classes.loginButton}>Dont have an account?</Link>
+                </form>
+            </div>
+        </div>    
+        </div>
     </div>
   )
 }

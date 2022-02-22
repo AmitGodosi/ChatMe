@@ -1,13 +1,16 @@
-import { useContext, useRef } from 'react'
-import './Register.css'
-import { axiosInstance } from '../../config'
-import { Link } from 'react-router-dom'
-import {useHistory} from 'react-router'
+import classes from './Register.module.css'
+import Google from '../../asset/google.png'
+import Facebook from '../../asset/facebook.png'
+import Github from '../../asset/github.png'
+import {CircularProgress} from '@material-ui/core'
 import { CloudUploadOutlined} from '@material-ui/icons'
+import { Link } from 'react-router-dom'
+import { useContext, useRef } from 'react'
+import { axiosInstance } from '../../config'
+import {useHistory} from 'react-router'
 import firebase from '../../firebase'
 import { AuthContext } from '../../Context/Auth/AuthContext'
-import {CircularProgress} from '@material-ui/core'
-import axios from 'axios'
+import { googleProvider, facebookProvider, githubProvider } from '../service/Auth'
 
 const Register = () => {
     const username = useRef()
@@ -15,7 +18,6 @@ const Register = () => {
     const email = useRef()
     const history = useHistory()
     const ctx = useContext(AuthContext)
-
 
     const submitHandler = async (e) => {
         e.preventDefault()
@@ -47,33 +49,71 @@ const Register = () => {
         return URL
     }
 
-  return (<div className='registerContainer'>
-    <div className='registerMessageWrapper'>
-        <h2 className='registerMessage'>Start Sending Message Now FOR FREE</h2>
-    </div>
-    <div className='registerFormWrapper'>
-    <form className='registerForm'  onSubmit={submitHandler}>
-        <div className='registerInput'>
-            <h4>User Name:</h4>
-            <input required ref={username}></input>
-        </div>        
-        <div className='registerInput'>
-            <h4>Email:</h4>
-            <input type='email' required ref={email}></input>
-        </div>        
-        <div className='registerInput'>
-            <h4>Password:</h4>
-            <input type='password' required minLength='6' ref={password}></input>
-        </div>                
-        <label className='registerInput'>
-                <h4> Profile Picture:</h4>
-                <input type='file' hidden />
-                <CloudUploadOutlined />
-        </label>        
-        <button className="registerSubmit">{ctx.isFetching ? <CircularProgress color='white' size='20px' /> : 'Create Account'}</button>
-        <Link to='/login' style={{textDecoration: 'none', color: 'white'}} className="registerlogin">Already have an account?</Link>
-    </form>
-    </div>
+    const socialRegister = async (provider) => {
+        try {
+            const result = await firebase.auth().signInWithPopup(provider)
+            const user = {
+                username: result.user.displayName || 'NULL',
+                email: result.user.email,
+                password: result.user.uid
+            }
+            if(result.user?.photoURL) user.pic =  result.user.photoURL
+            try {
+                await axiosInstance.post('/auth/register', user)
+                history.push('/login')
+            } catch (error) {
+                alert('this email was already in use! try Login instead.') 
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+  return (
+    <div className={classes.container}>
+        <div className={classes.nav}>
+            <h4>Amit Chat App</h4>
+            <h4>Register</h4>
+        </div>
+        <div className={classes.formWrapper}>
+        <div className={classes.form}>
+            <div>
+                <h2 className={classes.title}>Choose a Register Mathod</h2>
+            </div>
+            <div className={classes.methodWrapper}>
+                <div className={classes.social}>
+                    <div onClick={socialRegister.bind(null,googleProvider)} className={classes.google}>
+                    <img src={Google} alt="" />
+                    <h4>Google</h4>
+                    </div>    
+                    <div onClick={socialRegister.bind(null,facebookProvider)} className={classes.facebook}>
+                    <img src={Facebook} alt="" />
+                    <h4>Facebook</h4>
+                    </div>                   
+                    <div onClick={socialRegister.bind(null,githubProvider)} className={classes.github}>
+                    <img src={Github} alt="" />
+                    <h4>Github</h4>
+                    </div>                   
+                </div>
+                <div className={classes.center}>
+                    <div className={classes.line} />
+                    <div className={classes.or}>OR</div>
+                </div>
+                <form  onSubmit={submitHandler}  className={classes.data}>
+                    <input  type='email' required ref={email} placeholder='Email'></input>
+                    <input required ref={username}  placeholder='User Name'></input>
+                    <input  type='password' required minLength='6' ref={password} placeholder='Password'></input>
+                    <label className={classes.profilePic}>
+                        <h4> Profile Picture:</h4>
+                        <input type='file' hidden />
+                        <CloudUploadOutlined />
+                    </label> 
+                    <button className={classes.registerButton}>{ctx.isFetching ? <CircularProgress color='white' size='20px' /> : 'Create Account'}</button>
+                    <Link to='/login' style={{textDecoration: 'none', color: 'white'}} className={classes.loginButton}>Already have an account?</Link>
+                </form>
+            </div>
+        </div>    
+        </div>
     </div>
   )
 }

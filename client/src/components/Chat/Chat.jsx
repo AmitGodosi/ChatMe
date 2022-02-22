@@ -16,6 +16,7 @@ const Chat = () => {
   const {userOpenConversation, openConversation, openConversationMessages, dispatch} = useContext(ConversationContext)
   const [conversation, setConversation] = useState([])
   const [users, setUsers] = useState([])
+  const [temp, setTemp] = useState([])
   const [reversedUsers, setReversedUsers] = useState([])
   const [isOpen, setIsOpen] = useState(false)
   const user = localStorage.getItem('user')
@@ -92,35 +93,31 @@ const Chat = () => {
     try {
       const res = await axiosInstance.post('/message/', body)
       dispatch({type: 'OPEN_CONVERSATION_MESSAGES', payload: [...openConversationMessages, res.data]})
+      // setTemp(prev => [...prev, res.data])
       messageInput.current.value = ''  
     } catch (error) {
       console.log(error)
     }
   }
+useEffect(() => {
+}, [openConversationMessages])
 
   //---------------FETCH ALL CONVERSATION MESSAGE---------------
   const fetchMessage = async (c) => {
-    setIsOpen(true)
     dispatch({type: 'OPEN_CONVERSATION', payload: c})
     const URL = '/message/'.concat(c._id)
     const res = await axiosInstance.get(URL)
     dispatch({type: 'OPEN_CONVERSATION_MESSAGES', payload: res.data})
-
+    
     const friendId = c.members.filter(key => key !== id)
     const body = {
       userId: friendId
     }
     const friendURL = '/users/?userId='.concat(friendId[0])    
     const friend = await axiosInstance.get(friendURL, body)
-    dispatch({type: 'USER_OPEN_CONVERSATION', payload: friend.data})
-
+    await dispatch({type: 'USER_OPEN_CONVERSATION', payload: friend.data})
+    setIsOpen(true)
   }
-
-  //---------------SCROLL DOWN---------------
-  // useEffect(() => {
-  //   scrollRef.current?.scrollIntoView({behavior: 'smooth'})
-  // }, [openConversationMessages])
-
 
   //-----------------SEARCH--------------------
   const friendsQueryHandler = (e) => {
