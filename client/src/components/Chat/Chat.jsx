@@ -6,11 +6,12 @@ import {io} from 'socket.io-client'
 import { axiosInstance } from '../../config'
 import { ConversationContext } from '../../Context/Conversation/ConversationContext';
 import { useDispatch } from 'react-redux'
-import { queryActions } from '../../store/index';
+import { queryActions } from '../../store/index'
 import BeforeMeesaging from '../Message/BeforeMeesaging';
+import noProfile from '../../asset/noProfile.png'
 
 const Chat = () => {
-  const reduxDispatch = useDispatch()
+  const reduxDispatch = useDispatch() 
   const {userOpenConversation, openConversation, openConversationMessages, isOpen, dispatch} = useContext(ConversationContext)
   const [conversation, setConversation] = useState([])
   const [users, setUsers] = useState([])
@@ -115,7 +116,7 @@ useEffect(() => {
   //-----------------SEARCH--------------------
   const friendsQueryHandler = (e) => {
     const query = e.target.value
-    reduxDispatch(queryActions.friends(query.toLowerCase()))
+    reduxDispatch(queryActions.setQuery(query))
   }
 
   const usersQueryHandler = (e) => {
@@ -124,6 +125,7 @@ useEffect(() => {
       setReversedUsers([...users].reverse())
     } else {
       const includesUsers = users.filter(user => user.username.toLowerCase().includes(query.toLowerCase()))
+      if(includesUsers.length === 0) includesUsers.push({pic: noProfile,username: 'No Such Result'})
       setReversedUsers(includesUsers)
     }
   }
