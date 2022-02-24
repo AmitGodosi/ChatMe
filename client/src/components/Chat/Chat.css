@@ -19,10 +19,15 @@
     flex: 2;
     margin: 10px;
     max-height: 100vh; 
-    display: block;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
 }
 
 .conversationWrapper {
+    width: 50%;
     max-height: 37.5%;
     display: block;
     margin-bottom: 20px;
@@ -39,6 +44,7 @@
 
 .newUserWrapper {
     height: 37.5%;
+    width: 50%;
     overflow-y: scroll;
     background-color: rgb(191, 207, 221);
     padding: 5px;
@@ -173,6 +179,15 @@
 
 
 @media only screen and (max-width: 431px) {
+
+    .conversationWrapper {
+        width: 90%;
+    }
+
+    .newUserWrapper {
+        width: 90%;
+    }
+
     .newUsers {
         font-size: 20px;
     }

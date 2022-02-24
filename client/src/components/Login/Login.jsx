@@ -27,7 +27,7 @@ const Login = () => {
         try {
             const loginUser =  await axiosInstance.post('/auth/login', user)
             ctx.dispatch({type: 'LOGIN_SUCCESS', payload: loginUser.data})
-            const { userPass, ...others } = loginUser.data
+            const { createdAt,email, password,updatedAt,__v, ...others } = loginUser.data
             localStorage.setItem('user', JSON.stringify(others))
             window.location.reload(false);        
         } catch (error) {
@@ -45,7 +45,7 @@ const Login = () => {
             }
             try {
                 const loginUser =  await axiosInstance.post('/auth/login', user)
-                const { userPass, ...others } = loginUser.data
+                const { createdAt,email, password,updatedAt,__v, ...others } = loginUser.data
                 localStorage.setItem('user', JSON.stringify(others))
                 window.location.reload(false);             
             } catch (error) {
