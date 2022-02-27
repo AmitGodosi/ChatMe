@@ -1,6 +1,5 @@
-import React from 'react'
 import './Conversation.css'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, memo } from 'react'
 import noProfile from '../../asset/noProfile.png'
 import { axiosInstance } from '../../config'
 import {useSelector, useDispatch } from 'react-redux'
@@ -58,4 +57,4 @@ const Conversation = ({c, id, onClick}) => {
   )
 }
 
-export default Conversation
+export default memo(Conversation)

@@ -1,21 +1,14 @@
-import './Online.css'
+import './LatestRegister.css'
 import '../Conversation/Conversation.css'
 import { axiosInstance } from '../../config'
 import noProfile from '../../asset/noProfile.png'
-// import {useSelector } from 'react-redux'
-// import { useState, useEffect } from 'react'
+import { memo } from 'react'
 
-const Online = ({img, name, id, friendId}) => {
-  // const usersQuery = useSelector(state => state.friends)
-  // const [isIncludes, setIsIncludes] = useState(true)
-
+const LatestRegister = ({img, name, id, friendId}) => {
   if(img === '') img = noProfile
 
-  // useEffect(() => {
-
-  // }, usersQuery)
-
   const newConversation = async () => {
+    console.log('new con online')
     if(id !== friendId) {
     const body = {
       senderId: id,
@@ -33,9 +26,9 @@ const Online = ({img, name, id, friendId}) => {
 }
 
   return ( <>
-    <div className='online'>
+    <div onClick={newConversation}  className='online'>
         <div className="onlineImgContainer">
-        <img onClick={newConversation} src={img} alt="" className="onlineImg" />
+        <img src={img} alt="" className="onlineImg" />
         <span className='onlineIndex'></span>
         </div>
         <span className='onlineName'>{name}</span>
@@ -44,4 +37,4 @@ const Online = ({img, name, id, friendId}) => {
   )
 }
 
-export default Online
+export default memo(LatestRegister)

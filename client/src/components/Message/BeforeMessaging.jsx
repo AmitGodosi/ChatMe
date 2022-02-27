@@ -5,15 +5,15 @@ import { ConversationContext } from '../../Context/Conversation/ConversationCont
 import './Message.css'
 
 
-const BeforeMeesaging = ({id, user}) => {
-  const [members, setMembers] = useState([])
+const BeforeMessaging = ({id, user}) => {
+  const [members, setMembers] = useState([id])
   const [secondUser, setSecondUser] = useState({})
   const [isMessages, setIsMessages] = useState(true)
-  const { dispatch, openConversationMessages} = useContext(ConversationContext)
+  const {openConversationMessages} = useContext(ConversationContext)
   const scrollRef = useRef()
-  const arr = [id]
+  // console.log('Before')
 
-    //---------------SCROLL DOWN // MESSAGES EXIST?---------------
+    //---------------SET MEMBERS // SCROLL DOWN // MESSAGES EXIST?---------------
     useEffect(() => {
       scrollRef.current?.scrollIntoView({behavior: 'smooth'})
       if(openConversationMessages.length === 0) {
@@ -21,31 +21,18 @@ const BeforeMeesaging = ({id, user}) => {
       } else { 
         setIsMessages(true)
       }
-    }, [openConversationMessages])
-
-    //---------------SET MEMBERS---------------
-    useEffect(() => {
-      const checkMembers = () => {
-        const temp = []
-        const arr = Object.assign(temp,openConversationMessages)
-        dispatch({type:'OPEN_CONVERSATION_MESSAGES', payload: [arr]})
-        for(let message of openConversationMessages) {
-          if(arr.length === 1 && message.sender !== arr[0]) {
-            arr.push(message.sender)
-          }
-          else {
-            setMembers(arr)
-            return
-          }
+      for(let message of openConversationMessages) {
+        if(message.sender !== members[0]) {
+          setMembers(prev => [...prev, message.sender])
+          return
         }
       }
-      checkMembers()
-    }, [])
+    }, [openConversationMessages])
 
     //---------------SET CONVERSATION FRIEND---------------
     useEffect(() => {
       const fetchMembers = async () => {
-        if(arr.length === 1) {
+        if(members.length === 2) {
           const second = await axiosInstance.get(`/users/?userId=${members[1]}`)
           setSecondUser(second.data)
         }
@@ -64,4 +51,4 @@ const BeforeMeesaging = ({id, user}) => {
        </div>;
 };
 
-export default BeforeMeesaging;
+export default BeforeMessaging;

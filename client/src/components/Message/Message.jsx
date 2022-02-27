@@ -3,6 +3,7 @@ import noProfile from '../../asset/noProfile.png'
 import {format} from 'timeago.js';
 
 const Message = ({sender, text, id, second, first, time}) => {
+  // console.log('Message')
   const fUser = JSON.parse(first)
   let own = true
   let user = fUser
@@ -12,7 +13,6 @@ const Message = ({sender, text, id, second, first, time}) => {
   }
 
   time = format(time)
-
   return (<>
 
     <div className={own ? 'messageCon ownCon' : 'messageCon friendCon'}>

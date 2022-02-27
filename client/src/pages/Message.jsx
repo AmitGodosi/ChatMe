@@ -9,7 +9,7 @@ const Message = () => {
     <Navbar />
     <Provider store={store}>
     <ConversationContextProvider>
-    <Chat />
+      <Chat />
     </ConversationContextProvider>
     </Provider>
     </>

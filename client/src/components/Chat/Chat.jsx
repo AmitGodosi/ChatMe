@@ -1,13 +1,13 @@
 import Conversation from '../Conversation/Conversation';
 import './Chat.css'
-import Online from '../Online/Online';
+import LatestRegister from '../LatestRegister/LatestRegister';
 import { useEffect, useState, useRef, useContext} from 'react';
 import {io} from 'socket.io-client'
 import { axiosInstance } from '../../config'
 import { ConversationContext } from '../../Context/Conversation/ConversationContext';
 import { useDispatch } from 'react-redux'
 import { queryActions } from '../../store/index'
-import BeforeMeesaging from '../Message/BeforeMeesaging';
+import BeforeMessaging from '../Message/BeforeMessaging';
 import noProfile from '../../asset/noProfile.png'
 
 const Chat = () => {
@@ -15,11 +15,10 @@ const Chat = () => {
   const {userOpenConversation, openConversation, openConversationMessages, isOpen, dispatch} = useContext(ConversationContext)
   const [conversation, setConversation] = useState([])
   const [users, setUsers] = useState([])
-  const [reversedUsers, setReversedUsers] = useState([])
   const user = localStorage.getItem('user')
   const messageInput = useRef() 
   const id = JSON.parse(user)._id
-  
+
   //---------------SOCKET---------------
   const socket = useRef()
   const [arrivalMessage, setArrivalMessage] = useState(null)
@@ -50,6 +49,7 @@ const Chat = () => {
   //---------------FETCH ALL CONVERSATIONS---------------
   useEffect(() => {
     const conversationHandler = async () => {
+      if(conversation.length === 0) {
       try {
         const URL = '/conversation/'.concat(id)
         const res = await axiosInstance.get(URL)
@@ -58,16 +58,18 @@ const Chat = () => {
         console.log(error)
       }
     }
+  }
     conversationHandler()
   }, [])
 
   //---------------FETCH ALL USERS---------------
   useEffect(() => {
     const getUsers = async () => {
+      if(users.length === 0) {
       const allUsers = await axiosInstance.get('/users/all')
       setUsers(allUsers.data)
-      setReversedUsers([...allUsers.data].reverse())
     }
+  }
     getUsers()
   }, [])
 
@@ -96,8 +98,6 @@ const Chat = () => {
       console.log(error)
     }
   }
-useEffect(() => {
-}, [openConversationMessages])
 
   //---------------FETCH ALL CONVERSATION MESSAGE---------------
   const fetchMessage = async (c) => {
@@ -124,11 +124,11 @@ useEffect(() => {
   const usersQueryHandler = (e) => {
     const query = e.target.value
     if(query === '') {
-      setReversedUsers([...users].reverse())
+      setUsers(prev =>[...prev])
     } else {
       const includesUsers = users.filter(user => user.username.toLowerCase().includes(query.toLowerCase()))
       if(includesUsers.length === 0) includesUsers.push({pic: noProfile,username: 'No Such Result'})
-      setReversedUsers(includesUsers)
+      setUsers(includesUsers)
     }
   }
 
@@ -137,7 +137,8 @@ useEffect(() => {
     dispatch({type: 'IS_OPEN'})
     }
 
-  return <div className='messageContainer'>
+  return (
+  <div className='messageContainer'>
     {!isOpen && <> 
     {/* TITLE */}
     <div className='messageTitle'>
@@ -166,8 +167,8 @@ useEffect(() => {
         <input placeholder='Search...' type="text" className="search" onChange={usersQueryHandler}/>
       </div>
       <div className='newUsersList'>
-      {users.length > 0 && reversedUsers.map(user => {
-      return <Online friendId={user._id} id={id} img={user.pic} name={user.username} key={user._id}/>
+      {users.length > 0 && users.map(user => {
+      return <LatestRegister friendId={user._id} id={id} img={user.pic} name={user.username} key={user._id}/>
       })}
       </div>
     </div>
@@ -183,7 +184,7 @@ useEffect(() => {
         </div>
         <div>
         <div className='openConversationMessages'>
-        {<BeforeMeesaging user={user} id={id}/>}
+        {<BeforeMessaging user={user} id={id}/>}
         </div>
       <div className='chatMessageInput'>
         <textarea ref={messageInput} className='chatMessageTextarea' placeholder='Write Something...'></textarea>
@@ -193,7 +194,8 @@ useEffect(() => {
     </div>
       </>}
 
-  </div>;
+  </div>
+  );
 };
 
 export default Chat;
