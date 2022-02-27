@@ -17,9 +17,11 @@ const Message = ({sender, text, id, second, first, time}) => {
     <div className={own ? 'messageCon ownCon' : 'messageCon friendCon'}>
       <div className='textDetails'>
         <img src={user.pic || noProfile} alt="" className="messageImg" />
-        <p className={own ? 'messageText ownText' : 'messageText friendText'}>{text}</p>
-      </div>
+        <div className={own ? 'messageText ownText' : 'messageText friendText'}>
+        <p className='mText'>{text}</p>
         <span className='time'>{time}</span>
+        </div>
+      </div>
     </div>
     </>
   )

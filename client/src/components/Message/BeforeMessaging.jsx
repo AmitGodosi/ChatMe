@@ -9,10 +9,14 @@ const BeforeMessaging = ({id, user}) => {
   const [members, setMembers] = useState([id])
   const [secondUser, setSecondUser] = useState({})
   const [isMessages, setIsMessages] = useState(true)
-  const {openConversationMessages} = useContext(ConversationContext)
+  const {openConversationMessages, dispatch} = useContext(ConversationContext)
   const scrollRef = useRef()
 
     //---------------SET MEMBERS // SCROLL DOWN // MESSAGES EXIST?---------------
+    useEffect(() => {
+      dispatch({type: 'OPEN_CONVERSATION_MESSAGES', payload: [{key: '1'}]})
+    }, [])
+
     useEffect(() => {
       scrollRef.current?.scrollIntoView({behavior: 'smooth'})
       if(openConversationMessages.length === 0) {

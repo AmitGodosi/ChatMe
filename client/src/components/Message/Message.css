@@ -8,6 +8,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
+    max-width: 75vw;
 }
 
 .time {
@@ -29,21 +30,24 @@
 }
 
 .messageText {
-    margin-right: 10px;
     border-radius: 10px;
     font-size: 15px;
-    padding: 10px;
-    width: 60%;
+    max-width: 85%;
+    word-wrap: break-word;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+}
+
+.mText {
+    margin-top: 0;
 }
 
 .ownText {
-    background-color: rgb(102, 161, 230);
-    width: 100%;
+    background-color: rgba(102, 162, 230, 0.747);
 }
 
 .friendText {
-    background-color: rgb(183, 191, 201);
-    width: 100%;
+    background-color: rgba(183, 191, 201, 0.767);
 }
 
 .noConversation {
