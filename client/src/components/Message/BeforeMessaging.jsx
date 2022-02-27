@@ -11,7 +11,6 @@ const BeforeMessaging = ({id, user}) => {
   const [isMessages, setIsMessages] = useState(true)
   const {openConversationMessages} = useContext(ConversationContext)
   const scrollRef = useRef()
-  // console.log('Before')
 
     //---------------SET MEMBERS // SCROLL DOWN // MESSAGES EXIST?---------------
     useEffect(() => {

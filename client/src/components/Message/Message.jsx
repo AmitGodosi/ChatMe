@@ -3,7 +3,6 @@ import noProfile from '../../asset/noProfile.png'
 import {format} from 'timeago.js';
 
 const Message = ({sender, text, id, second, first, time}) => {
-  // console.log('Message')
   const fUser = JSON.parse(first)
   let own = true
   let user = fUser
