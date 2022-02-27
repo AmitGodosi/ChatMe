@@ -148,7 +148,7 @@ const Chat = () => {
     <div className="leftBar">
       {/* friends conversation */}
     <div className='conversationWrapper'>
-    <h4 className='newUsers'>Your Friends</h4>
+    <h4 className='newUsers'>Chats</h4>
       <div className="searchContainer">
         <input placeholder='Search...' type="text" className="search" onChange={friendsQueryHandler}/>
       </div>

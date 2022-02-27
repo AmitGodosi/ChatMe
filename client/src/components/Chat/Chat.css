@@ -35,6 +35,7 @@
     border-radius: 10px;
     box-shadow: rgb(158, 179, 197) 0px 2px 8px 0px;
     max-height: 37.5%;
+    margin-right: 15px;
 }
 
 .conversationWrapper {

@@ -10,7 +10,7 @@ const querySlice = createSlice({
       state.friendQuery = actions.payload;
     },
     setChats(state, actions) {
-      state.chats = [...state.chats, actions.payload];
+      state.chats = actions.payload;
     },
   },
 });
