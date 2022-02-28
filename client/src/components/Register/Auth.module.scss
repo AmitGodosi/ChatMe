@@ -1,3 +1,12 @@
+@mixin social {
+    width: 75%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 10px;
+    padding: 5px;
+}
+
 .container {
     height: 100vh;
     width: 100vw;
@@ -11,14 +20,14 @@
     align-items: center;
     justify-content: space-around;
     height: 40px;
-}
 
-.nav h4 {
-    margin: 0;
-    letter-spacing: 1px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    color: whitesmoke;
-    font-weight: 400;
+    & h4 {
+        margin: 0;
+        letter-spacing: 1px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        color: whitesmoke;
+        font-weight: 400;    
+    }
 }
 
 .formWrapper {
@@ -27,17 +36,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
-}
 
-.form {
-    border-radius: 20px;
-    background-color: rgb(226, 225, 224);
-    width: 90%;
-    height: 75%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+    &__form {
+        border-radius: 20px;
+        background-color: rgb(226, 225, 224);
+        width: 90%;
+        height: 75%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;    
+    }
 }
 
 .title {
@@ -53,77 +62,74 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-}
 
-.formWrapper {
+    &__social {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 20px;
+        cursor: pointer;    
+
+        &__img {
+            width: 32px;
+            height: 32px;
+            object-fit: cover;        
+        }
+
+        &__name {
+            margin: 20px 5px;
+            color: whitesmoke;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+    }
+
+    &__center {
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
+    position: relative;
+    }
+    
+    &__data {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+
+        & input {
+            margin: 10px 0;
+            border: 1px solid grey;
+            padding: 10px;
+            border-radius: 5px;
+            width: 90%;    
+
+            &:focus {
+                outline: none;
+            }
+        }
+    }
 }
 
-.social {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 20px;
-    cursor: pointer;
-}
-
-.google, .facebook, .github {
-    width: 75%;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    border-radius: 10px;
-    padding: 5px;
-}
 
 .google {
     background-color: rgb(41, 110, 41);
+    @include social
 }
 
 .facebook {
     background-color: rgb(11, 69, 175);
+    @include social
 }
 
 .github {
     background-color: rgb(27, 27, 27);
+    @include social
 }
 
-.google img, .facebook img, .github img {
-    width: 32px;
-    height: 32px;
-    object-fit: cover;
-}
-
-.google h4, .facebook h4, .github h4 {
-    margin: 20px 5px;
-    color: whitesmoke;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
-
-.data {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
-
-.data input {
-    margin: 10px 0;
-    border: 1px solid grey;
-    padding: 10px;
-    border-radius: 5px;
-    width: 90%;
-}
-
-.data input:focus {
-    outline: none;
-}
 
 .profilePic {
     width: 75%;
@@ -140,7 +146,7 @@
     padding: 5px;
 }
 
-.registerButton {
+.mainButton {
     padding: 10px;
     border: none;
     background-color: rgb(219, 197, 167);
@@ -149,13 +155,13 @@
     font-weight: bold;
     cursor: pointer;
     margin-bottom: 10px;
+
+    &:hover {
+        background-color: rgb(187, 151, 101);
+    }
 }
 
-.registerButton:hover {
-    background-color: rgb(187, 151, 101);
-}
-
-.loginButton {
+.moveButton {
     padding: 10px;
     border: none;
     background-color: rgb(197, 147, 77);
@@ -164,18 +170,10 @@
     font-weight: bold;
     cursor: pointer;
     width: 90%;
-}
 
-.loginButton:hover {
-    background-color: rgb(139, 95, 32);
-}
-
-.center {
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
+    &:hover {
+        background-color: rgb(139, 95, 32);
+    }
 }
 
 .line {

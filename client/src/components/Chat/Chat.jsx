@@ -1,5 +1,5 @@
 import Conversation from '../Conversation/Conversation';
-import './Chat.css'
+import classes from './Chat.module.scss'
 import LatestRegister from '../LatestRegister/LatestRegister';
 import { useEffect, useState, useRef, useContext} from 'react';
 import {io} from 'socket.io-client'
@@ -138,58 +138,56 @@ const Chat = () => {
     }
 
   return (
-  <div className='messageContainer'>
+  <div className={classes.container}>
     {!isOpen && <> 
     {/* TITLE */}
-    <div className='messageTitle'>
+    <div className={classes.title}>
       <h2>Amit Godosi Chap App</h2>
     </div>
     {/* leftbar */}
-    <div className="leftBar">
-      {/* friends conversation */}
-    <div className='conversationWrapper'>
-    <h4 className='newUsers'>Chats</h4>
-      <div className="searchContainer">
-        <input placeholder='Search...' type="text" className="search" onChange={friendsQueryHandler}/>
-      </div>
-      <div className="conversationContainer">
-        {conversation.length > 0 && conversation.map(c => {
-          return <Conversation c={c} key={c._id} id={id} onClick={fetchMessage.bind(null, c)}/>
-        })}
-        {conversation.length === 0 && <p>You dont start any conversation!</p>}
-      </div>
+    <div className={classes.leftBar}>
+      <div className={classes.conversations}>
+        <h4>Chats</h4>
+        <div className={classes.search}>
+          <input placeholder='Search...' type="text" onChange={friendsQueryHandler}/>
+        </div>
+        <div className={classes.conversation__Container}>
+          {conversation.length > 0 && conversation.map(c => {
+            return <Conversation c={c} key={c._id} id={id} onClick={fetchMessage.bind(null, c)}/>
+          })}
+          {conversation.length === 0 && <p>You dont start any conversation!</p>}
+        </div>
       </div>
       
-          {/* new users */}
-       <div className='newUserWrapper'>
-      <h4 className='newUsers'>Newest Users</h4>
-      <div className="searchContainer">
-        <input placeholder='Search...' type="text" className="search" onChange={usersQueryHandler}/>
+      <div className={classes.newUsers}>
+        <h4>Newest Users</h4>
+        <div className={classes.search}>
+          <input placeholder='Search...' type="text" onChange={usersQueryHandler}/>
+        </div>
+        <div className={classes.newUsers__List}>
+          {users.length > 0 && users.map(user => {
+          return <LatestRegister friendId={user._id} id={id} img={user.pic} name={user.username} key={user._id}/>
+          })}
+        </div>
       </div>
-      <div className='newUsersList'>
-      {users.length > 0 && users.map(user => {
-      return <LatestRegister friendId={user._id} id={id} img={user.pic} name={user.username} key={user._id}/>
-      })}
-      </div>
-    </div>
     </div>
     </>}
     
     {/* messages */}
       {isOpen && <>
-    <div className="message">
-        <div className='UserConversationNav'>
+    <div className={classes.messages}>
+        <div className={classes.messages__Nav}>
            <button onClick={backToMain}>BACK</button>
            <h4>{userOpenConversation.username}</h4>
         </div>
         <div>
-        <div className='openConversationMessages'>
-        {<BeforeMessaging user={user} id={id}/>}
+        <div className={classes.openChat}>
+            {<BeforeMessaging user={user} id={id}/>}
         </div>
-      <div className='chatMessageInput'>
-        <textarea ref={messageInput} className='chatMessageTextarea' placeholder='Write Something...'></textarea>
-        <button onClick={sendMessageHandler}>Send</button>
-      </div>
+        <div className={classes.input__container}>
+            <textarea ref={messageInput} placeholder='Write Something...'></textarea>
+            <button onClick={sendMessageHandler}>Send</button>
+          </div>
       </div>
     </div>
       </>}

@@ -3,7 +3,7 @@ import { AuthContext } from '../../Context/Auth/AuthContext'
 import {CircularProgress} from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import { axiosInstance } from '../../config'
-import classes from '../Register/Register.module.css'
+import classes from '../Register/Auth.module.scss'
 import Google from '../../asset/google.png'
 import Facebook from '../../asset/facebook.png'
 import Github from '../../asset/github.png'
@@ -63,34 +63,34 @@ const Login = () => {
             <h4>Login</h4>
         </div>
         <div className={classes.formWrapper}>
-        <div className={classes.form}>
+        <div className={classes.formWrapper__form}>
             <div>
                 <h2 className={classes.title}>Choose a Login Mathod</h2>
             </div>
             <div className={classes.methodWrapper}>
-                <div className={classes.social}>
+                <div className={classes.methodWrapper__social}>
                     <div onClick={socialLogin.bind(null, googleProvider)} className={classes.google}>
-                    <img src={Google} alt="" />
-                    <h4>Google</h4>
+                    <img className={classes.methodWrapper__social__img} src={Google} alt="" />
+                    <h4 className={classes.methodWrapper__social__name}>Google</h4>
                     </div>    
                     <div onClick={socialLogin.bind(null, facebookProvider)}  className={classes.facebook}>
-                    <img src={Facebook} alt="" />
-                    <h4>Facebook</h4>
+                    <img className={classes.methodWrapper__social__img} src={Facebook} alt="" />
+                    <h4 className={classes.methodWrapper__social__name}>Facebook</h4>
                     </div>                   
                     <div onClick={socialLogin.bind(null, githubProvider)}  className={classes.github}>
-                    <img src={Github} alt="" />
-                    <h4>Github</h4>
+                    <img className={classes.methodWrapper__social__img} src={Github} alt="" />
+                    <h4 className={classes.methodWrapper__social__name}>Github</h4>
                     </div>                   
                 </div>
-                <div className={classes.center}>
+                <div className={classes.methodWrapper__center}>
                     <div className={classes.line} />
                     <div className={classes.or}>OR</div>
                 </div>
-                <form className={classes.data}  onSubmit={submitHandler}>
+                <form className={classes.methodWrapper__data}  onSubmit={submitHandler}>
                     <input  type='email' required ref={email} placeholder='Email'></input>
                     <input  type='password' required minLength='6' ref={password} placeholder='Password'></input>
-                    <button className={classes.registerButton}>{ctx.isFetching ? <CircularProgress color='white' size='20px' /> : 'Login'}</button>
-                    <Link to='/register' style={{textDecoration: 'none', color: 'white'}} className={classes.loginButton}>Dont have an account?</Link>
+                    <button className={classes.mainButton}>{ctx.isFetching ? <CircularProgress color='white' size='20px' /> : 'Login'}</button>
+                    <Link to='/register' style={{textDecoration: 'none', color: 'white'}} className={classes.moveButton}>Dont have an account?</Link>
                 </form>
             </div>
         </div>    

@@ -1,0 +1,57 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+
+    &__Details {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        max-width: 75vw; 
+        
+        & img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;        
+        }
+
+        &__Text {
+            border-radius: 10px;
+            font-size: 15px;
+            max-width: 85%;
+            word-wrap: break-word;
+            padding: 5px 10px;
+            margin-bottom: 10px;
+
+            & p {
+                margin-top: 0;
+            }
+
+            & span {
+                font-size: 10px;
+            }
+        }
+    }    
+}
+
+.ownCon {
+    align-items: flex-start;
+}
+
+.friendCon {
+    align-items: flex-end;
+}
+
+.ownText {
+    background-color: rgba(102, 162, 230, 0.747);
+}
+
+.friendText {
+    background-color: rgba(183, 191, 201, 0.767);
+}
+
+.noConversation {
+    text-align: center;
+    color: gray;
+    opacity: 30%;
+}

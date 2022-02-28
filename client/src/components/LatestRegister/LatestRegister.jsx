@@ -1,5 +1,4 @@
-import './LatestRegister.css'
-import '../Conversation/Conversation.css'
+import classes from './LatestRegister.module.scss'
 import { axiosInstance } from '../../config'
 import noProfile from '../../asset/noProfile.png'
 import { memo } from 'react'
@@ -26,12 +25,11 @@ const LatestRegister = ({img, name, id, friendId}) => {
 }
 
   return ( <>
-    <div onClick={newConversation}  className='online'>
-        <div className="onlineImgContainer">
-        <img src={img} alt="" className="onlineImg" />
-        <span className='onlineIndex'></span>
+    <div onClick={newConversation}  className={classes.online}>
+        <div className={classes.online__ImgContainer}>
+          <img src={img} alt=""/>
         </div>
-        <span className='onlineName'>{name}</span>
+        <span className={classes.online__Name}>{name}</span>
     </div>
     </>
   )

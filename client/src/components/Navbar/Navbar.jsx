@@ -1,4 +1,4 @@
-import classes from './Navbar.module.css';
+import classes from './Navbar.module.scss';
 import { AuthContext } from '../../Context/Auth/AuthContext';
 import { useContext } from 'react';
 
@@ -15,9 +15,9 @@ const Navbar = () => {
   }
 
   return <div className={classes.container}>
-       <button onClick={logoutHandler}>Log-out</button>  
-       <h4>{username}</h4>
-  </div>;
+            <button onClick={logoutHandler}>Log-out</button>  
+            <h4>{username}</h4>
+        </div>;
 };
 
 export default Navbar;

@@ -1,4 +1,4 @@
-import classes from './Register.module.css'
+import classes from './Auth.module.scss'
 import Google from '../../asset/google.png'
 import Facebook from '../../asset/facebook.png'
 import Github from '../../asset/github.png'
@@ -76,30 +76,30 @@ const Register = () => {
             <h4>Register</h4>
         </div>
         <div className={classes.formWrapper}>
-        <div className={classes.form}>
+        <div className={classes.formWrapper__form}>
             <div>
                 <h2 className={classes.title}>Choose a Register Mathod</h2>
             </div>
             <div className={classes.methodWrapper}>
-                <div className={classes.social}>
+                <div className={classes.methodWrapper__social}>
                     <div onClick={socialRegister.bind(null,googleProvider)} className={classes.google}>
-                    <img src={Google} alt="" />
-                    <h4>Google</h4>
+                    <img className={classes.methodWrapper__social__img} src={Google} alt="" />
+                    <h4 className={classes.methodWrapper__social__name}>Google</h4>
                     </div>    
                     <div onClick={socialRegister.bind(null,facebookProvider)} className={classes.facebook}>
-                    <img src={Facebook} alt="" />
-                    <h4>Facebook</h4>
+                    <img className={classes.methodWrapper__social__img} src={Facebook} alt="" />
+                    <h4 className={classes.methodWrapper__social__name}>Facebook</h4>
                     </div>                   
                     <div onClick={socialRegister.bind(null,githubProvider)} className={classes.github}>
-                    <img src={Github} alt="" />
-                    <h4>Github</h4>
+                    <img className={classes.methodWrapper__social__img} src={Github} alt="" />
+                    <h4 className={classes.methodWrapper__social__name}>Github</h4>
                     </div>                   
                 </div>
-                <div className={classes.center}>
+                <div className={classes.methodWrapper__center}>
                     <div className={classes.line} />
                     <div className={classes.or}>OR</div>
                 </div>
-                <form  onSubmit={submitHandler}  className={classes.data}>
+                <form  onSubmit={submitHandler}  className={classes.methodWrapper__data}>
                     <input  type='email' required ref={email} placeholder='Email'></input>
                     <input required ref={username}  placeholder='User Name'></input>
                     <input  type='password' required minLength='6' ref={password} placeholder='Password'></input>
@@ -108,8 +108,8 @@ const Register = () => {
                         <input type='file' hidden />
                         <CloudUploadOutlined />
                     </label> 
-                    <button className={classes.registerButton}>{ctx.isFetching ? <CircularProgress color='white' size='20px' /> : 'Create Account'}</button>
-                    <Link to='/login' style={{textDecoration: 'none', color: 'white'}} className={classes.loginButton}>Already have an account?</Link>
+                    <button className={classes.mainButton}>{ctx.isFetching ? <CircularProgress color='white' size='20px' /> : 'Create Account'}</button>
+                    <Link to='/login' style={{textDecoration: 'none', color: 'white'}} className={classes.moveButton}>Already have an account?</Link>
                 </form>
             </div>
         </div>    

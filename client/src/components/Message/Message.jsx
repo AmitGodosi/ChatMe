@@ -1,4 +1,4 @@
-import './Message.css'
+import './Message.scss'
 import noProfile from '../../asset/noProfile.png'
 import {format} from 'timeago.js';
 
@@ -14,12 +14,12 @@ const Message = ({sender, text, id, second, first, time}) => {
   time = format(time)
   return (<>
 
-    <div className={own ? 'messageCon ownCon' : 'messageCon friendCon'}>
-      <div className='textDetails'>
-        <img src={user.pic || noProfile} alt="" className="messageImg" />
-        <div className={own ? 'messageText ownText' : 'messageText friendText'}>
-        <p className='mText'>{text}</p>
-        <span className='time'>{time}</span>
+    <div className={own ? 'container ownCon' : 'container friendCon'}>
+      <div className='container__Details'>
+        <img src={user.pic || noProfile} alt=""/>
+        <div className={own ? 'container__Details__Text ownText' : 'container__Details__Text friendText'}>
+          <p>{text}</p>
+          <span>{time}</span>
         </div>
       </div>
     </div>

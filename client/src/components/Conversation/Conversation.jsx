@@ -1,4 +1,4 @@
-import './Conversation.css'
+import classes from './Conversation.module.scss'
 import { useEffect, useState, memo } from 'react'
 import noProfile from '../../asset/noProfile.png'
 import { axiosInstance } from '../../config'
@@ -44,14 +44,15 @@ const Conversation = ({c, id, onClick}) => {
   }, [c])
 
   return (<>
-   {isExist && <div onClick={onClick} className='conversation'>
-      <div className='cImgWrapper'>
-        <img src={friendData.pic || noProfile} alt="" className="cImg" />
+   {isExist && 
+   <div onClick={onClick} className={classes.conversation}>
+      <div className={classes.conversation__ImgWrapper}>
+        <img src={friendData.pic || noProfile} alt="" />
       </div>
-        <div className='cDetails'>
-        <span className='cName'>{friendData.username}</span>
-        <p className='cMessage'>{lastMessage}</p>
-        </div>
+      <div className={classes.conversation__Details}>
+        <span>{friendData.username}</span>
+        <p>{lastMessage}</p>
+      </div>
     </div>}
     </>
   )

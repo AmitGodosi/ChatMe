@@ -2,7 +2,7 @@ import { useState, useRef, useEffect, useContext } from "react";
 import Message from "./Message";
 import { axiosInstance } from "../../config";
 import { ConversationContext } from '../../Context/Conversation/ConversationContext';
-import './Message.css'
+import './Message.scss'
 
 
 const BeforeMessaging = ({id, user}) => {
@@ -47,7 +47,7 @@ const BeforeMessaging = ({id, user}) => {
       {isMessages && openConversationMessages.map(message => {
               return (
               <div key={message._id} ref={scrollRef}>
-               <Message sender={message.sender} text={message.text} id={id} first={user} second={secondUser} time={message.createdAt} />
+                  <Message sender={message.sender} text={message.text} id={id} first={user} second={secondUser} time={message.createdAt} />
               </div>)
             })}
             {!isMessages && <h2 className='noConversation'>Start Texting...</h2>}
