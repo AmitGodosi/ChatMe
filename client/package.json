@@ -23,7 +23,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "compile:sass": "node-sass src/components/Chat/Chat.scss style.css",
+    "compile:sass": "node-sass src/components/Chat/Chat.scss index.css",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
