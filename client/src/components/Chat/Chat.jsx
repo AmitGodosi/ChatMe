@@ -35,7 +35,7 @@ const Chat = () => {
   }, [])
 
   useEffect(() => {
-     if (arrivalMessage && openConversation?.members.includes(arrivalMessage.sender)) {
+     if (arrivalMessage && Object.keys(openConversation).length > 0 && openConversation?.members.includes(arrivalMessage.sender)) {
         dispatch({type: 'OPEN_CONVERSATION_MESSAGES', payload:[...openConversationMessages, arrivalMessage]})
      }
   }, [arrivalMessage, userOpenConversation])

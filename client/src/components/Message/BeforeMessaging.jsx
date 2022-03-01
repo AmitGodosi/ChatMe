@@ -4,7 +4,6 @@ import { axiosInstance } from "../../config";
 import { ConversationContext } from '../../Context/Conversation/ConversationContext';
 import './Message.scss'
 
-
 const BeforeMessaging = ({id, user}) => {
   const [members, setMembers] = useState([id])
   const [secondUser, setSecondUser] = useState({})

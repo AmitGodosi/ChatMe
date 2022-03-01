@@ -36,7 +36,7 @@ const Conversation = ({c, id, onClick}) => {
       const res = await axiosInstance.get(URL)
       if(res.data.length > 0) {
         const message = res.data[res.data.length-1]
-        const editedMessage = message.text.slice(0,50)
+        const editedMessage = message.text.slice(0,20)
         setLastMessage(editedMessage)
         }    
     }
