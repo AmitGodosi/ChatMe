@@ -64,4 +64,9 @@ router.post("/login", async (req, res) => {
   }
 });
 
+//CHECK
+router.get("/", (req, res) => {
+  res.send("Server is RUNNING");
+});
+
 module.exports = router;

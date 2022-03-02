@@ -9,7 +9,21 @@ const messageRoutes = require("./routes/message");
 const usersRoutes = require("./routes/user");
 
 dotenv.config();
-app.use(cors());
+
+app.use(
+  cors({
+    origin: "*",
+    credentials: true,
+    optionSuccessStatus: 200,
+  })
+);
+
+const http = require("http").createServer(app);
+const io = require("socket.io")(http, {
+  cors: {
+    origin: "*",
+  },
+});
 
 mongoose.connect(
   process.env.MONGO_URL,
@@ -28,16 +42,11 @@ app.use("/api/message", messageRoutes);
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
+http.listen(PORT, () => {
   console.log(`Backend server is running on port ${PORT} !`);
 });
 
 //------------SOCKET----------------
-const io = require("socket.io")(8900, {
-  cors: {
-    origin: "http://localhost:3000",
-  },
-});
 
 let users = [];
 
@@ -65,7 +74,6 @@ io.on("connection", (socket) => {
   });
 
   //send and get message
-  // if (user?.socketId) {
   socket.on("sendMessage", ({ senderId, receiverId, text }) => {
     const user = getUser(receiverId);
     io.to(user?.socketId).emit("getMessage", {
@@ -73,7 +81,6 @@ io.on("connection", (socket) => {
       text,
     });
   });
-  // }
 
   //when disconnect
   socket.on("disconnect", () => {

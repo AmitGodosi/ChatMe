@@ -1,203 +1,217 @@
-@mixin social {
-    width: 75%;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    border-radius: 10px;
-    padding: 5px;
+$color-light-brown: rgb(219, 197, 167);
+$color-light-yellow: rgb(168, 187, 81);
+$color-bold-yellow: rgb(156, 154, 38);
+$color-white-grey: #f7f7f7;
+$color-light-grey: lightgray;
+$color-grey: grey;
+$color-white: white;
+
+@mixin BTN($FW, $BC, $MB) {
+  text-align: center;
+  padding: 10px;
+  border: none;
+  background-color: $BC;
+  border-radius: 5px;
+  color: $color-white;
+  cursor: pointer;
+  margin-bottom: $MB;
+  letter-spacing: 1px;
+  transition: all 0.2s;
+  font-weight: $FW;
+}
+
+@mixin SOCIAL($BC, $MB) {
+  width: 75%;
+  background-color: $BC;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 10px;
+  padding: 5px;
+  letter-spacing: 1.5px;
+  margin-bottom: $MB;
+  cursor: pointer;
+}
+
+@mixin flexCC {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .container {
-    height: 100vh;
-    width: 100vw;
-    background-color: rgb(233, 237, 240);
+  height: 100vh;
+  width: 100vw;
+  background-color: rgb(233, 237, 240);
 }
 
 .nav {
-    width: 100%;
-    background-color: rgb(219, 197, 167);
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    height: 40px;
+  width: 100%;
+  background-color: $color-light-brown;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 40px;
 
-    & h4 {
-        margin: 0;
-        letter-spacing: 1px;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-        color: whitesmoke;
-        font-weight: 400;    
-    }
+  & h4 {
+    margin: 0;
+    letter-spacing: 1px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    color: whitesmoke;
+    font-weight: 400;
+  }
 }
 
 .formWrapper {
-    width: 100%;
-    height: calc(100vh - 40px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  width: 100%;
+  height: calc(100vh - 40px);
+  @include flexCC;
 
-    &__form {
-        border-radius: 20px;
-        background-color: rgb(226, 225, 224);
-        width: 90%;
-        height: 75%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;    
-    }
+  &__form {
+    border-radius: 20px;
+    background-color: rgb(230, 217, 205);
+    width: 90%;
+    height: 75%;
+    @include flexCC;
+    flex-direction: column;
+  }
 }
 
 .title {
-    text-align: center;
-    color: white;
-    letter-spacing: 1px;
-    flex: 2;
+  text-align: center;
+  background: linear-gradient(
+    to right,
+    $color-light-yellow,
+    $color-bold-yellow
+  );
+  background-clip: text;
+  color: transparent;
+  letter-spacing: 2px;
+  flex: 2;
+  transition: all 0.2s;
+
+  &:hover {
+    transform: skewY(2deg) skewX(15deg) scale(1.1);
+    text-shadow: 5px 10px 10px rgb(207, 191, 154);
+  }
 }
 
 .methodWrapper {
-    flex: 10;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
+  flex: 10;
+  @include flexCC;
+  width: 100%;
 
-    &__social {
-        flex: 1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        gap: 20px;
-        cursor: pointer;    
+  &__social {
+    flex: 1;
+    @include flexCC;
+    flex-direction: column;
 
-        &__img {
-            width: 32px;
-            height: 32px;
-            object-fit: cover;        
-        }
-
-        &__name {
-            margin: 20px 5px;
-            color: whitesmoke;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-        }
+    &__img {
+      width: 32px;
+      height: 32px;
+      object-fit: cover;
     }
 
-    &__center {
+    &__name {
+      margin: 20px 5px;
+      color: whitesmoke;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    }
+  }
+
+  &__center {
     height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include flexCC;
     position: relative;
-    }
-    
-    &__data {
-        flex: 1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
+  }
 
-        & input {
-            margin: 10px 0;
-            border: 1px solid grey;
-            padding: 10px;
-            border-radius: 5px;
-            width: 90%;    
+  &__data {
+    flex: 1;
+    @include flexCC;
+    flex-direction: column;
 
-            &:focus {
-                outline: none;
-            }
-        }
+    & input {
+      margin: 10px 0;
+      border: 3px solid $color-white-grey;
+      padding: 10px;
+      border-radius: 5px;
+      width: 90%;
+
+      &:focus {
+        outline: none;
+      }
     }
+  }
 }
 
-
 .google {
-    background-color: rgb(41, 110, 41);
-    @include social
+  @include SOCIAL(rgb(41, 110, 41), 20px);
 }
 
 .facebook {
-    background-color: rgb(11, 69, 175);
-    @include social
+  @include SOCIAL(rgb(11, 69, 175), 20px);
 }
 
 .github {
-    background-color: rgb(27, 27, 27);
-    @include social
+  @include SOCIAL(rgb(27, 27, 27), 0);
 }
 
-
 .profilePic {
-    width: 75%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    border: 1px solid grey;
-    border-radius: 5px;
-    background-color: white;
-    color: rgb(218, 214, 214);
-    margin: 10px 0;
-    cursor: pointer;
-    padding: 5px;
+  width: 75%;
+  @include flexCC;
+  gap: 10px;
+  border: 3px solid $color-white-grey;
+  border-radius: 5px;
+  background-color: $color-white;
+  color: rgb(218, 214, 214);
+  margin: 10px 0;
+  cursor: pointer;
+  padding: 5px;
 }
 
 .mainButton {
-    padding: 10px;
-    border: none;
-    background-color: rgb(219, 197, 167);
-    border-radius: 5px;
-    color: rgb(255, 255, 255);
-    font-weight: bold;
-    cursor: pointer;
-    margin-bottom: 10px;
+  @include BTN(550, $color-light-yellow, 10px);
 
-    &:hover {
-        background-color: rgb(187, 151, 101);
-    }
+  &:hover {
+    background-color: rgb(104, 122, 24);
+    transform: translateY(5px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
 }
 
 .moveButton {
-    padding: 10px;
-    border: none;
-    background-color: rgb(197, 147, 77);
-    border-radius: 5px;
-    color: rgb(255, 255, 255);
-    font-weight: bold;
-    cursor: pointer;
-    width: 90%;
+  @include BTN(500, $color-bold-yellow, 0);
 
-    &:hover {
-        background-color: rgb(139, 95, 32);
-    }
+  &:hover {
+    background-color: rgb(114, 116, 27);
+    transform: translateY(5px);
+  }
 }
 
 .line {
-    width: 2px;
-    height: 90%;
-    background-color: lightgray;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-    z-index: 1;
+  width: 2px;
+  height: 90%;
+  background-color: $color-light-grey;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  z-index: 1;
 }
 
 .or {
-    border: 2px solid lightgray;
-    border-radius: 50%;
-    padding: 10px;
-    color: gray;
-    background-color: white;
-    font-weight: bold;
-    z-index: 2;
-}
-
-@media only screen and (max-width: 431px) {
+  border: 2px solid $color-light-grey;
+  border-radius: 50%;
+  padding: 10px;
+  color: $color-grey;
+  background-color: $color-white;
+  font-weight: bold;
+  z-index: 2;
 }
