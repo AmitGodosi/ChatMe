@@ -21,7 +21,7 @@ $color-white: white;
 }
 
 @mixin SOCIAL($BC, $MB) {
-  width: 75%;
+  width: 95%;
   background-color: $BC;
   display: flex;
   align-items: center;
@@ -69,12 +69,14 @@ $color-white: white;
   @include flexCC;
 
   &__form {
+    padding: 10px;
     border-radius: 20px;
     background-color: rgb(230, 217, 205);
     width: 90%;
     height: 75%;
     @include flexCC;
     flex-direction: column;
+    overflow-y: scroll;
   }
 }
 
@@ -137,7 +139,7 @@ $color-white: white;
       border: 3px solid $color-white-grey;
       padding: 10px;
       border-radius: 5px;
-      width: 90%;
+      width: 100%;
 
       &:focus {
         outline: none;

@@ -1,33 +1,33 @@
 .container {
-    width: 100vw;
-    background-color: rgb(2, 74, 133);
-    height: 40px;
-    display: flex;
-    align-items: center;
+  width: 100vw;
+  background-color: rgb(2, 74, 133);
+  height: 40px;
+  display: flex;
+  align-items: center;
+  margin: 0;
+  gap: 20px;
+  justify-content: center;
+  position: fixed;
+  z-index: 999;
+
+  & h4 {
+    color: rgb(185, 204, 221);
+    letter-spacing: 1px;
     margin: 0;
-    gap: 20px;
-    justify-content: center;
-    position: fixed;
-    z-index: 999;
+  }
 
-    & h4 {
-        color: rgb(185, 204, 221);
-        letter-spacing: 1px;
-        margin: 0;    
+  & button {
+    padding: 5px;
+    background-color: rgb(24, 155, 216);
+    font-size: 15px;
+    color: aliceblue;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+
+    &:hover {
+      background-color: rgb(17, 116, 161);
     }
-
-    & button {
-        padding: 5px;
-        background-color: rgb(24, 155, 216);
-        font-size: 15px;
-        color: aliceblue;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        margin-right: 10px;
-
-        &:hover {
-            background-color: rgb(17, 116, 161);
-        }
-    }
+  }
 }

@@ -23,10 +23,21 @@ const Register = () => {
   const history = useHistory();
   const ctx = useContext(AuthContext);
 
+  const lowerToUpper = (username) => {
+    const arr = username.split(" ");
+    const edited = [];
+    arr.map((name) => {
+      const nameUpper = name.charAt(0).toUpperCase() + name.slice(1);
+      edited.push(nameUpper);
+    });
+    return edited.join(" ");
+  };
+
   const submitHandler = async (e) => {
     e.preventDefault();
+    const usernameUpper = await lowerToUpper(username.current.value);
     const user = {
-      username: username.current.value,
+      username: usernameUpper,
       email: email.current.value,
       password: password.current.value,
     };
@@ -56,8 +67,9 @@ const Register = () => {
   const socialRegister = async (provider) => {
     try {
       const result = await firebase.auth().signInWithPopup(provider);
+      const username = await lowerToUpper(result.user.displayName);
       const user = {
-        username: result.user.displayName || "NULL",
+        username,
         email: result.user.email,
         password: result.user.uid,
       };
@@ -65,6 +77,7 @@ const Register = () => {
       try {
         await axiosInstance.post("/auth/register", user);
         history.push("/login");
+        alert("CONNECT with the same SOCIAL-MEDIA you just REGISTER");
       } catch (error) {
         alert("this email was already in use! try Login instead.");
       }
