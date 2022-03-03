@@ -129,3 +129,9 @@
     transform: translate(0);
   }
 }
+
+@media screen and (max-width: 768px) {
+  .info__title {
+    display: block;
+  }
+}

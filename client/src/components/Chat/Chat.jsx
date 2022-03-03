@@ -31,8 +31,8 @@ const Chat = () => {
   const [arrivalMessage, setArrivalMessage] = useState(null);
 
   useEffect(() => {
-    // socket.current = io("http://localhost:5000");
-    socket.current = io("https://amitgodosi-chat.herokuapp.com");
+    socket.current = io("http://localhost:5000");
+    // socket.current = io("https://amitgodosi-chat.herokuapp.com");
     socket.current.on("getMessage", (data) => {
       setArrivalMessage({
         sender: data.senderId,
@@ -136,7 +136,7 @@ const Chat = () => {
   //-----------------SEARCH--------------------
   const friendsQueryHandler = (e) => {
     const query = e.target.value;
-    reduxDispatch(queryActions.setQuery(query));
+    reduxDispatch(queryActions.setQuery(query.toLowerCase()));
   };
 
   const usersQueryHandler = (e) => {
