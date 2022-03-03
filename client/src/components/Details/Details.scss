@@ -94,10 +94,10 @@
 
   &__info {
     @include flexCC;
-    gap: 10px;
 
     &__p {
       font-size: 18px;
+      margin-left: 10px;
     }
 
     &__icon {
