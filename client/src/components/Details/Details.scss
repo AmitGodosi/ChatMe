@@ -1,0 +1,131 @@
+@mixin flexCC {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.details__container {
+  height: 100vh;
+  width: 100vw;
+  background-color: white;
+}
+
+.info__wrapper {
+  width: 100%;
+  height: 100%;
+  padding: 25px;
+  @include flexCC;
+  flex-direction: column;
+  gap: 50px;
+  background-image: linear-gradient(
+      to right bottom,
+      rgba(129, 209, 209, 0.8),
+      rgba(80, 150, 150, 0.8)
+    ),
+    url(../../asset//A.png);
+  background-size: cover;
+}
+
+.info__title {
+  letter-spacing: 2px;
+  background: linear-gradient(
+    to right,
+    rgba(186, 228, 228, 0.8),
+    rgba(139, 201, 201, 0.8)
+  );
+  background-clip: text;
+  color: transparent;
+  animation: moveToButtom 2s;
+}
+
+.info__container {
+  @include flexCC;
+  flex-wrap: wrap;
+  gap: 30px;
+  animation: moveToUp 2s;
+}
+
+.box {
+  height: 25vh;
+  width: 35vw;
+  background-color: rgba(212, 229, 236, 0.6);
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+  perspective: 1500px;
+  position: relative;
+
+  &:hover &__side__front {
+    transform: rotateY(180deg);
+  }
+  &:hover &__side__back {
+    transform: rotateY(0);
+    background-color: rgba(169, 217, 238, 0.6);
+  }
+
+  &__side {
+    transition: all 0.8s;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    backface-visibility: hidden;
+
+    &__front {
+      height: 100%;
+      @include flexCC;
+    }
+
+    &__back {
+      height: 100%;
+      @include flexCC;
+      flex-direction: column;
+      gap: 10px;
+      transform: rotateY(180deg);
+    }
+  }
+
+  &__title {
+    font-size: 20px;
+    letter-spacing: 2px;
+    text-align: center;
+    color: #e0dbdb;
+  }
+
+  &__info {
+    @include flexCC;
+    gap: 10px;
+
+    &__p {
+      font-size: 18px;
+    }
+
+    &__icon {
+      width: 32px;
+      height: 32px;
+    }
+  }
+}
+@keyframes moveToUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+
+@keyframes moveToButtom {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}

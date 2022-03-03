@@ -1,6 +1,7 @@
 import classes from "./Navbar.module.scss";
 import { AuthContext } from "../../Context/Auth/AuthContext";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const dispatch = useContext(AuthContext).dispatch;
@@ -16,6 +17,21 @@ const Navbar = () => {
 
   return (
     <div className={classes.container}>
+      <Link
+        to="/"
+        style={{ textDecoration: "none", color: "white" }}
+        className={classes.Links}
+      >
+        Home
+      </Link>
+      <Link
+        to="/details"
+        style={{ textDecoration: "none", color: "white" }}
+        className={classes.Links}
+      >
+        Info
+      </Link>
+
       <button onClick={logoutHandler}>Log-out</button>
       <h4>{username}</h4>
     </div>

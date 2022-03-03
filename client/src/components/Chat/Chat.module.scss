@@ -20,7 +20,7 @@ $color_subTitle: rgb(62, 109, 141);
   text-align: center;
   color: $color_subTitle;
   font-size: 30px;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
   padding: 5px;
   margin: 0;
 }
@@ -38,7 +38,9 @@ $color_subTitle: rgb(62, 109, 141);
   margin-top: 50px;
   text-align: center;
   letter-spacing: 1.5px;
-  color: rgb(18, 71, 95);
+  background: linear-gradient(to right, rgb(119, 165, 173), rgb(12, 60, 120));
+  background-clip: text;
+  color: transparent;
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
   animation: moveToButtom 2s;

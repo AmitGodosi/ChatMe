@@ -1,6 +1,7 @@
 import Login from "./components/Login/Login";
 import Message from "./pages/Message";
 import Register from "./components/Register/Register";
+import Details from "./components/Details/Details";
 import {
   BrowserRouter as Router,
   Switch,
@@ -21,6 +22,12 @@ function App() {
         </Route>
         <Route path="/register" exact>
           {!ifUser ? <Register /> : <Redirect to="/" />}
+        </Route>
+        <Route path="/register" exact>
+          {!ifUser ? <Register /> : <Redirect to="/" />}
+        </Route>
+        <Route path="/details" exact>
+          {ifUser ? <Details /> : <Redirect to="/" />}
         </Route>
       </Switch>
     </Router>
