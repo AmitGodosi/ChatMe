@@ -1,102 +1,102 @@
 .ownContainer {
-    display: flex;
-    flex-direction: column;
-    margin: 10px 15px;
-    position: relative;
-    align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  margin: 10px 15px;
+  position: relative;
+  align-items: flex-start;
 
-    &:after {
-        content: '';
-        position: absolute;
-        width: 0;
-        height: 0;
-        border-top: 15px solid rgba(138, 182, 233, 0.747);
-        border-left: 15px solid transparent;
-        border-right: 15px solid transparent;
-        top: 0px;
-        left: -15px;
-    }
-    
-    &:before {
-        content: '';
-        position: absolute;
-        width: 0;
-        height: 0;
-        border-top: 17px solid rgba(148, 195, 248, 0.747);
-        border-left: 16px solid transparent;
-        border-right: 16px solid transparent;
-        top: 0px;
-        left: -16px;
-    }
-}    
+  &:after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-top: 15px solid rgba(141, 184, 233, 0.747);
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    top: 0px;
+    left: -10px;
+  }
+
+  &:before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-top: 17px solid rgba(136, 175, 219, 0.747);
+    border-left: 16px solid transparent;
+    border-right: 16px solid transparent;
+    top: 0px;
+    left: -10px;
+  }
+}
 
 .friendContainer {
-    display: flex;
-    flex-direction: column;
-    margin: 10px 15px;
-    position: relative;
-    align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+  margin: 10px 15px;
+  position: relative;
+  align-items: flex-end;
 
-    &:after {
-        content: '';
-        position: absolute;
-        width: 0;
-        height: 0;
-        border-bottom: 15px solid rgba(199, 203, 207, 0.767);
-        border-left: 15px solid transparent;
-        border-right: 15px solid transparent;
-        bottom: 10px;
-        right: -15px;
-    }
-    
-    &:before {
-        content: '';
-        position: absolute;
-        width: 0;
-        height: 0;
-        border-bottom: 17px solid rgba(202, 208, 214, 0.767);
-        border-left: 16px solid transparent;
-        border-right: 16px solid transparent;
-        bottom: 10px;
-        right: -16px;
-    }
-}   
+  &:after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-bottom: 15px solid rgba(199, 203, 207, 0.767);
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    bottom: 10px;
+    right: -13px;
+  }
+
+  &:before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-bottom: 17px solid rgba(202, 208, 214, 0.767);
+    border-left: 16px solid transparent;
+    border-right: 16px solid transparent;
+    bottom: 10px;
+    right: -13px;
+  }
+}
 
 .container__Text {
-    border-radius: 10px;
-    font-size: 15px;
-    max-width: 85%;
-    word-wrap: break-word;
-    padding: 5px 10px;
-    margin-bottom: 10px;
+  border-radius: 10px;
+  font-size: 15px;
+  max-width: 85%;
+  word-wrap: break-word;
+  padding: 5px 10px;
+  margin-bottom: 10px;
 
-    & p {
-        margin-top: 0;
-    }
+  & p {
+    margin-top: 0;
+  }
 
-    & span {
-        font-size: 10px;
-    }
+  & span {
+    font-size: 10px;
+  }
 }
 
 .ownCon {
-    align-items: flex-start;
+  align-items: flex-start;
 }
 
 .friendCon {
-    align-items: flex-end;
+  align-items: flex-end;
 }
 
 .ownText {
-    background-color: rgba(102, 162, 230, 0.747);
+  background-color: rgba(102, 162, 230, 0.747);
 }
 
 .friendText {
-    background-color: rgba(183, 191, 201, 0.767);
+  background-color: rgba(183, 191, 201, 0.767);
 }
 
 .noConversation {
-    text-align: center;
-    color: gray;
-    opacity: 30%;
+  text-align: center;
+  color: gray;
+  opacity: 30%;
 }

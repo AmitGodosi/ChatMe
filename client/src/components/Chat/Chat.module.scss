@@ -44,6 +44,7 @@ $color_subTitle: rgb(62, 109, 141);
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
   animation: moveToButtom 2s;
+  display: block;
 }
 
 .leftBar {
@@ -211,6 +212,10 @@ $color_subTitle: rgb(62, 109, 141);
 }
 
 @media only screen and (max-width: 431px) {
+  .title {
+    display: block;
+  }
+
   .conversations {
     width: 90%;
 

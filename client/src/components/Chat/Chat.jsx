@@ -9,8 +9,10 @@ import { useDispatch } from "react-redux";
 import { queryActions } from "../../store/index";
 import BeforeMessaging from "../Message/BeforeMessaging";
 import noProfile from "../../asset/noProfile.png";
+import { CircularProgress } from "@material-ui/core";
 
 const Chat = () => {
+  const [sendingMessage, setSendingMessage] = useState(false);
   const reduxDispatch = useDispatch();
   const {
     userOpenConversation,
@@ -31,8 +33,8 @@ const Chat = () => {
   const [arrivalMessage, setArrivalMessage] = useState(null);
 
   useEffect(() => {
-    // socket.current = io("http://localhost:5000");
-    socket.current = io("https://amitgodosi-chat.herokuapp.com");
+    socket.current = io("http://localhost:5000");
+    // socket.current = io("https://amitgodosi-chat.herokuapp.com");
     socket.current.on("getMessage", (data) => {
       setArrivalMessage({
         sender: data.senderId,
@@ -91,6 +93,8 @@ const Chat = () => {
   //---------------SEND NEW MESSAGE---------------
   const sendMessageHandler = async (e) => {
     e.preventDefault();
+    if (messageInput.current.value === "") return;
+    setSendingMessage(true);
     const body = {
       conversationId: openConversation._id,
       sender: id,
@@ -112,6 +116,7 @@ const Chat = () => {
         payload: [...openConversationMessages, res.data],
       });
       messageInput.current.value = "";
+      setSendingMessage(false);
     } catch (error) {
       console.log(error);
     }
@@ -240,7 +245,13 @@ const Chat = () => {
                   ref={messageInput}
                   placeholder="Write Something..."
                 ></textarea>
-                <button onClick={sendMessageHandler}>Send</button>
+                <button onClick={sendMessageHandler}>
+                  {sendingMessage ? (
+                    <CircularProgress color="white" size="20px" />
+                  ) : (
+                    "Send"
+                  )}
+                </button>
               </div>
             </div>
           </div>
