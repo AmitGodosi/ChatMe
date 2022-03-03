@@ -10,6 +10,7 @@ import { queryActions } from "../../store/index";
 import BeforeMessaging from "../Message/BeforeMessaging";
 import noProfile from "../../asset/noProfile.png";
 import { CircularProgress } from "@material-ui/core";
+import Navbar from "../Navbar/Navbar";
 
 const Chat = () => {
   const [sendingMessage, setSendingMessage] = useState(false);
@@ -164,100 +165,103 @@ const Chat = () => {
   };
 
   return (
-    <div className={classes.container}>
-      {!isOpen && (
-        <>
-          {/* TITLE */}
-          <div className={classes.title}>
-            <h2>Amit Godosi Chap App</h2>
-          </div>
-          {/* leftbar */}
-          <div className={classes.leftBar}>
-            <div className={classes.conversations}>
-              <h4>Chats</h4>
-              <div className={classes.search}>
-                <input
-                  placeholder="Search..."
-                  type="text"
-                  onChange={friendsQueryHandler}
-                />
+    <>
+      <Navbar />
+      <div className={classes.container}>
+        {!isOpen && (
+          <>
+            {/* TITLE */}
+            <div className={classes.title}>
+              <h2>Amit Godosi Chap App</h2>
+            </div>
+            {/* leftbar */}
+            <div className={classes.leftBar}>
+              <div className={classes.conversations}>
+                <h4>Chats</h4>
+                <div className={classes.search}>
+                  <input
+                    placeholder="Search..."
+                    type="text"
+                    onChange={friendsQueryHandler}
+                  />
+                </div>
+                <div className={classes.conversation__Container}>
+                  {conversation.length > 0 &&
+                    conversation.map((c) => {
+                      return (
+                        <Conversation
+                          c={c}
+                          key={c._id}
+                          id={id}
+                          onClick={fetchMessage.bind(null, c)}
+                        />
+                      );
+                    })}
+                  {conversation.length === 0 && (
+                    <p>You dont start any conversation!</p>
+                  )}
+                </div>
               </div>
-              <div className={classes.conversation__Container}>
-                {conversation.length > 0 &&
-                  conversation.map((c) => {
-                    return (
-                      <Conversation
-                        c={c}
-                        key={c._id}
-                        id={id}
-                        onClick={fetchMessage.bind(null, c)}
-                      />
-                    );
-                  })}
-                {conversation.length === 0 && (
-                  <p>You dont start any conversation!</p>
-                )}
+
+              <div className={classes.newUsers}>
+                <h4>Newest Users</h4>
+                <div className={classes.search}>
+                  <input
+                    placeholder="Search..."
+                    type="text"
+                    onChange={usersQueryHandler}
+                  />
+                </div>
+                <div>
+                  {users.length > 0 &&
+                    users.map((user) => {
+                      return (
+                        <LatestRegister
+                          friendId={user._id}
+                          id={id}
+                          img={user.pic}
+                          name={user.username}
+                          key={user._id}
+                        />
+                      );
+                    })}
+                </div>
               </div>
             </div>
+          </>
+        )}
 
-            <div className={classes.newUsers}>
-              <h4>Newest Users</h4>
-              <div className={classes.search}>
-                <input
-                  placeholder="Search..."
-                  type="text"
-                  onChange={usersQueryHandler}
-                />
+        {/* messages */}
+        {isOpen && (
+          <>
+            <div className={classes.messages}>
+              <div className={classes.messages__Nav}>
+                <button onClick={backToMain}>BACK</button>
+                <h4>{userOpenConversation.username}</h4>
               </div>
               <div>
-                {users.length > 0 &&
-                  users.map((user) => {
-                    return (
-                      <LatestRegister
-                        friendId={user._id}
-                        id={id}
-                        img={user.pic}
-                        name={user.username}
-                        key={user._id}
-                      />
-                    );
-                  })}
+                <div className={classes.openChat}>
+                  {<BeforeMessaging user={user} id={id} />}
+                </div>
+                <div className={classes.input__container}>
+                  <textarea
+                    ref={messageInput}
+                    placeholder="Write Something..."
+                  ></textarea>
+                  <button onClick={sendMessageHandler}>
+                    {sendingMessage ? (
+                      <CircularProgress color="white" size="20px" />
+                    ) : (
+                      "Send"
+                    )}
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        </>
-      )}
-
-      {/* messages */}
-      {isOpen && (
-        <>
-          <div className={classes.messages}>
-            <div className={classes.messages__Nav}>
-              <button onClick={backToMain}>BACK</button>
-              <h4>{userOpenConversation.username}</h4>
-            </div>
-            <div>
-              <div className={classes.openChat}>
-                {<BeforeMessaging user={user} id={id} />}
-              </div>
-              <div className={classes.input__container}>
-                <textarea
-                  ref={messageInput}
-                  placeholder="Write Something..."
-                ></textarea>
-                <button onClick={sendMessageHandler}>
-                  {sendingMessage ? (
-                    <CircularProgress color="white" size="20px" />
-                  ) : (
-                    "Send"
-                  )}
-                </button>
-              </div>
-            </div>
-          </div>
-        </>
-      )}
-    </div>
+          </>
+        )}
+      </div>
+    </>
   );
 };
 

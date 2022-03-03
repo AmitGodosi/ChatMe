@@ -11,14 +11,15 @@
 
 .container {
   width: 100vw;
-  background-color: rgb(2, 74, 133);
   height: 40px;
   display: flex;
   align-items: center;
-  margin: 0;
-  gap: 20px;
   justify-content: center;
   position: fixed;
+  background-color: rgb(2, 74, 133);
+  margin: 0;
+  top: 0;
+  gap: 20px;
   z-index: 999;
 
   & h4 {

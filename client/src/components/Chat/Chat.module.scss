@@ -34,14 +34,14 @@ $color_subTitle: rgb(62, 109, 141);
 .container {
   display: flex;
   width: 100vw;
-  height: calc(100vh);
+  height: 100vh;
   overflow: hidden;
+  margin-top: 40px;
   flex-direction: column;
   background-color: $color_aliceblue;
 }
 
 .title {
-  margin-top: 50px;
   text-align: center;
   letter-spacing: 1.5px;
   background: linear-gradient(to right, rgb(119, 165, 173), rgb(12, 60, 120));
@@ -89,7 +89,6 @@ $color_subTitle: rgb(62, 109, 141);
     position: fixed;
     z-index: 999;
     width: 100vw;
-    margin-top: 40px;
 
     & button {
       cursor: pointer;
