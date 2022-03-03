@@ -41,7 +41,6 @@
 .info__container {
   @include flexCC;
   flex-wrap: wrap;
-  gap: 30px;
   animation: moveToUp 2s;
 }
 
@@ -54,6 +53,7 @@
   cursor: pointer;
   perspective: 1500px;
   position: relative;
+  margin: 10px;
 
   &:hover &__side__front {
     transform: rotateY(180deg);
